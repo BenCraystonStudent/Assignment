@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 public class AllCurrencies extends Fragment {
 
     public AllCurrencies() {
-        // Required empty public constructor
+        // Required empty public constructorbruh
     }
 
     @Override
