@@ -3,15 +3,22 @@ package com.example.assignmentpractice;
 import static java.lang.String.format;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import java.util.Comparator;
 import java.util.Locale;
 
 @Entity(tableName = "coin_table")
 public class Coin {
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "coin_name")
     String mCoin;
+
     String mCurrency;
+
     Double mValue;
 
     public Coin(String Name,String Currency, Double Value){
