@@ -1,5 +1,6 @@
 package com.example.assignmentpractice;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -14,6 +15,6 @@ public interface CoinDAO {
     @Query("DELETE FROM coin_table")
     void deleteAll();
 
-    @Query("SELECT * from coin_table ORDER BY coin ASC")
-    List<Coin> getAllCoins();
+    @Query("SELECT * from coin_table ORDER BY mCoin ASC")
+    LiveData<List<Coin>> getAllCoins();
 }
