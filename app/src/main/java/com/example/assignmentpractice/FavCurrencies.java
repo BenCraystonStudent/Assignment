@@ -14,9 +14,9 @@ import java.util.LinkedList;
 
 public class FavCurrencies extends Fragment {
 
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private final LinkedList<String> mCoinList = new LinkedList<>();
     private RecyclerView mRecyclerView;
-    private WordListAdapter zAdapter;
+    private CoinListAdapter zAdapter;
 
     public FavCurrencies() {
         // Required empty public constructor
@@ -31,13 +31,13 @@ public class FavCurrencies extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         for (int i = 0; i < 20; i++) {
-            mWordList.addLast("Scribble " + i);
+            mCoinList.addLast("Scribble " + i);
         }
 
         View rootView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        zAdapter = new WordListAdapter(getContext(), mWordList);
+        zAdapter = new CoinListAdapter(getContext(), mCoinList);
         recyclerView.setAdapter(zAdapter);
 
         return rootView;

@@ -20,6 +20,10 @@ public class Coin {
         mValue = Value;
     }
 
+    public Coin(String coin) {
+    }
+
+
     public String CoinName(){ return mCoin;}
 
     @NonNull
