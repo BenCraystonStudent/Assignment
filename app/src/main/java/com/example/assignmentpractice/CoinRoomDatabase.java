@@ -63,8 +63,8 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
                         // when it is first created
                         mDao.deleteAll();
 
-                        for (int i = 0; i <= coins.length - 1; i++) {
-                            Coin coin = new Coin(coins[i]);
+                        for (int i = 0; i < coins.length - 1; i++) {
+                            Coin coin = new Coin(coins[i],"GBP", 1.00);
                             mDao.insert(coin);
                         }
                         return null;
