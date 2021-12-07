@@ -18,6 +18,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     CoinListAdapter(Context context, List<Coin> mCoins) { mInflater = LayoutInflater.from(context); }
 
+
+
     @Override
     public CoinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = mInflater.inflate(R.layout.coinlist_item, parent, false);
