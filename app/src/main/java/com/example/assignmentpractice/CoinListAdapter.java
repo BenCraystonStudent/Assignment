@@ -13,13 +13,13 @@ import java.util.List;
 
 public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder>  {
 
-    private final LinkedList<String> mCoinList;
+   // private final LinkedList<String> mCoinList;
     private LayoutInflater mInflater;
     private List<Coin> mCoins;
 
-    public CoinListAdapter(Context context, LinkedList<String> CoinList) {
+    public CoinListAdapter(Context context, List<Coin> Coins) {
         mInflater = LayoutInflater.from(context);
-        this.mCoinList = CoinList;
+        this.mCoins = Coins;
     }
 
     @Override
@@ -30,9 +30,9 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     @Override
     public void onBindViewHolder(CoinViewHolder holder, int position) {
-        if (mCoinList != null) {
-            String mCurrent = mCoinList.get(position);
-            holder.CoinItemView.setText(mCurrent);
+        if (mCoins != null) {
+            Coin mCurrent = mCoins.get(position);
+            holder.CoinItemView.setText(mCurrent.mCoin);
         } else {
             holder.CoinItemView.setText("No Word");
         }

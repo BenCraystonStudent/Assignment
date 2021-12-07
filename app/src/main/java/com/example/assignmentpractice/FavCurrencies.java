@@ -30,7 +30,6 @@ public class FavCurrencies extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
     @Override
@@ -40,11 +39,11 @@ public class FavCurrencies extends Fragment {
             mCoinList.addLast("Scribble " + i);
         }
         */
-
+        mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
         View rootView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        zAdapter = new CoinListAdapter(getContext(), mCoinList);
+        zAdapter = new CoinListAdapter(getContext(), );
         recyclerView.setAdapter(zAdapter);
 
         mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>() {
