@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class AllCurrencies extends Fragment {
 
     private final LinkedList<String> mCoinList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private CoinListAdapter mAdapter;
+    private List<Coin> mCoins = new LinkedList<>();
 
     public AllCurrencies() {
         // Required empty public constructorbruh
@@ -37,7 +39,7 @@ public class AllCurrencies extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new CoinListAdapter(getContext(), mCoinList);
+        mAdapter = new CoinListAdapter(getContext(), (LinkedList<Coin>) mCoins);
         recyclerView.setAdapter(mAdapter);
 
         return rootView;

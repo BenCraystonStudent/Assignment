@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,10 +20,11 @@ import java.util.List;
 
 public class FavCurrencies extends Fragment {
 
-    private final LinkedList<String> mCoinList = new LinkedList<>();
+    //private final LinkedList<String> mCoinList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private CoinListAdapter zAdapter;
     private CoinViewModel mCoinViewModel;
+    private List<Coin> mCoins = new LinkedList<>();
 
     public FavCurrencies() {
         // Required empty public constructor
@@ -30,29 +33,30 @@ public class FavCurrencies extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-       /* for (int i = 0; i < 20; i++) {
-            mCoinList.addLast("Scribble " + i);
-        }
-        */
-        mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
+        mCoins.add(new Coin("dsaffsa", "fadsfds", 0.0));
+
+        //PART ONE
         View rootView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        zAdapter = new CoinListAdapter(getContext(), );
+        zAdapter = new CoinListAdapter(getContext(), (LinkedList<Coin>) mCoins);
         recyclerView.setAdapter(zAdapter);
 
-        mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>() {
-            @Override
-            public void onChanged(@Nullable final List<Coin> coins) {
-                // Update the cached copy of the words in the adapter.
-                zAdapter.setCoins(coins);
-            }
-        });
+
+        //PART TWO
+        //mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>() {
+        //    @Override
+        //    public void onChanged(@Nullable final List<Coin> coins) {
+        //        // Update the cached copy of the Coins in the adapter.
+        //zAdapter.setCoins(coins);
+        //    }
+        //});
 
         return rootView;
     }
