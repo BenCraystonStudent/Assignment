@@ -17,17 +17,20 @@ public class Coin {
     @ColumnInfo(name = "coin_name")
     String mCoin;
 
+    @ColumnInfo(name = "currency")
     String mCurrency;
 
+    @ColumnInfo(name = "value")
     Double mValue;
 
-    public Coin(String Name,String Currency, Double Value){
-        mCoin = Name;
-        mCurrency = Currency;
-        mValue = Value;
+    public Coin(String coin_name,String currency, Double value){
+        this.mCoin = coin_name;
+        this.mCurrency = currency;
+        this.mValue = value;
     }
 
-    public Coin(String coin) {
+    public Coin(){
+
     }
 
 

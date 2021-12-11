@@ -18,7 +18,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final LinkedList<Coin> mCoinList = new LinkedList<>();
+    //private final LinkedList<Coin> mCoinList = new LinkedList<>();
+    private final LinkedList<Coin> mCoins = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private CoinListAdapter zAdapter;
     private CoinViewModel mCoinViewModel;
@@ -31,11 +32,12 @@ public class MainActivity extends AppCompatActivity {
         mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final CoinListAdapter zAdapter = new CoinListAdapter(this, mCoinList);
+        final CoinListAdapter zAdapter = new CoinListAdapter(this, mCoins);
         recyclerView.setAdapter(zAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mCoinViewModel.getAllCoins().observe(this, new Observer<List<Coin>>() {
+        mCoinViewModel.getAllCoins().observe(this, new Observer<List<Coin>>()
+        {
             @Override
             public void onChanged(@Nullable final List<Coin> coins) {
                 // Update the cached copy of the words in the adapter.
