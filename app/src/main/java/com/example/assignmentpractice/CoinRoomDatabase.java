@@ -65,7 +65,9 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
 
 
                         Coin coin = new Coin("Bitcoin","GBP", 1.00);
+                        Coin coin2 = new Coin("Ethereum","GBP", 1.00);
                         mDao.insert(coin);
+                        mDao.insert(coin2);
 
                         return null;
                     }
