@@ -8,15 +8,14 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.LinkedList;
 import java.util.List;
 
-public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
+public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
 
-    public CoinListAdapter(Context context, List<Coin> mCoins)
+    public PortfolioListAdapter(Context context, List<Coin> mCoins)
     {
         mInflater = LayoutInflater.from(context);
     }
