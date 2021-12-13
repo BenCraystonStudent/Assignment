@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     private CoinListAdapter zAdapter;
     private CoinViewModel mCoinViewModel;
     public ViewPager mViewPager;
+    private PagerAdapter mPagerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +33,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.main_tabs);
         TabLayout mainTabs = findViewById(R.id.all_currencies);
         mViewPager = findViewById(R.id.all_currencies_viewpager);
-
-        mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
-
-        RecyclerView mRecyclerView = findViewById(R.id.recyclerview);
-        final CoinListAdapter zAdapter = new CoinListAdapter(this, mCoins);
-        mRecyclerView.setAdapter(zAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mCoinViewModel.getAllCoins().observe(this, new Observer<List<Coin>>()
-        {
-            @Override
-            public void onChanged(@Nullable final List<Coin> coins) {
-                // Update the cached copy of the words in the adapter.
-                zAdapter.setCoins(coins);
-            }
-        });
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.addOnPageChangeListener(this);
         mainTabs.setupWithViewPager(mViewPager);
     }
 
@@ -56,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void onPageSelected(int position) {
+        Fragment fragment = mPagerAdapter.getItem(position);
 
     }
 
