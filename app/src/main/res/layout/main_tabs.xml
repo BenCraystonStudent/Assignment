@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/all_currencies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         tools:ignore="MissingConstraints" />
+
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/all_currencies_viewpager"
@@ -23,20 +23,8 @@
         android:layout_height="match_parent"/>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/all_currencies"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints">
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 
 

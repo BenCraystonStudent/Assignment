@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setContentView(R.layout.main_tabs);
         TabLayout mainTabs = findViewById(R.id.all_currencies);
         mViewPager = findViewById(R.id.all_currencies_viewpager);
-        mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
+        mainTabs.addTab(mainTabs.newTab().setText(R.string.tab_label1));
+        mainTabs.addTab(mainTabs.newTab().setText(R.string.tab_label2));
+        mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mainTabs.getTabCount());
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.addOnPageChangeListener(this);
         mainTabs.setupWithViewPager(mViewPager);
