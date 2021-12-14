@@ -17,7 +17,7 @@ import java.util.List;
 public class AllCurrencies extends Fragment {
     private final LinkedList<String> mCoinList = new LinkedList<>();
     private final LinkedList<Coin> coins = new LinkedList<>();
-    private RecyclerView mRecyclerView;
+    private RecyclerView aRecyclerView;
     private CoinListAdapter aAdapter;
     private View aView;
     private Context aContext;
@@ -31,12 +31,12 @@ public class AllCurrencies extends Fragment {
     {
         aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         aContext = container.getContext();
-        mRecyclerView = aView.findViewById(R.id.recyclerview);
+        aRecyclerView = aView.findViewById(R.id.recyclerview);
         LinearLayoutManager llm = new LinearLayoutManager(aContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(llm);
+        aRecyclerView.setLayoutManager(llm);
         aAdapter = new CoinListAdapter((AppCompatActivity) aContext, coins);
-        mRecyclerView.setAdapter(aAdapter);
+        aRecyclerView.setAdapter(aAdapter);
 
         return aView;
     }
