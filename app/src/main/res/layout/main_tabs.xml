@@ -13,7 +13,7 @@
         android:id="@+id/all_currencies"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/white"
         tools:ignore="MissingConstraints" />
 
 

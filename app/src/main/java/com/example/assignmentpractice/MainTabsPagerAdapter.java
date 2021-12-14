@@ -26,6 +26,17 @@ class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
+    public String getPageTitle(int position)
+    {
+        switch (position)
+        {
+            case 0: return "All Currencies";
+            case 1: return "Portfolio";
+            default: return null;
+        }
+    }
+
+    @Override
     public int getCount() {
         return mNumOfTabs;
     }

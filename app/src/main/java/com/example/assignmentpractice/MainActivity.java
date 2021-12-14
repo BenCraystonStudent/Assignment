@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -37,8 +38,10 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mainTabs.addTab(mainTabs.newTab().setText(R.string.tab_label2));
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager(), mainTabs.getTabCount());
         mViewPager.setAdapter(mPagerAdapter);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.addOnPageChangeListener(this);
         mainTabs.setupWithViewPager(mViewPager);
+        mainTabs.setSelectedTabIndicatorColor(Color.BLUE);
     }
 
     @Override
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageSelected(int position) {
         Fragment fragment = mPagerAdapter.getItem(position);
-
+        fragment.onResume();
     }
 
     @Override
