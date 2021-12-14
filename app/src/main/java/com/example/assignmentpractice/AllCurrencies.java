@@ -30,7 +30,7 @@ public class AllCurrencies extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
-
+        aContext = container.getContext();
         mRecyclerView = aView.findViewById(R.id.recyclerview);
         LinearLayoutManager llm = new LinearLayoutManager(aContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);

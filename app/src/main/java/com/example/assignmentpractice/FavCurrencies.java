@@ -30,7 +30,7 @@ public class FavCurrencies extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         pView = inflater.inflate(R.layout.fragment_fav_currencies, container, false);
-
+        pContext = container.getContext();
         mRecyclerView = pView.findViewById(R.id.recyclerview);
         LinearLayoutManager llm = new LinearLayoutManager(pContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
