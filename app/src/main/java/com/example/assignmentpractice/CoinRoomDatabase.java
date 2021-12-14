@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import java.util.List;
 
-@Database(entities = {Coin.class}, version = 1, exportSchema = false)
+@Database(entities = {Coin.class}, version = 2, exportSchema = false)
 public abstract class CoinRoomDatabase extends RoomDatabase {
     public abstract CoinDAO coinDao();
     private static CoinRoomDatabase INSTANCE;
@@ -50,7 +50,7 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
                 private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
                     private final CoinDAO mDao;
-                    String[] coins = {"dolphin", "crocodile", "cobra"};
+                    Coin[] coins;
 
                     PopulateDbAsync(CoinRoomDatabase db) {
                         mDao = db.coinDao();
@@ -63,10 +63,12 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
                         // when it is first created
                         mDao.deleteAll();
 
-                        for (int i = 0; i < coins.length - 1; i++) {
-                            Coin coin = new Coin(coins[i],"GBP", 1.00);
-                            mDao.insert(coin);
-                        }
+
+                        Coin coin = new Coin("Bitcoin","GBP", 1.00);
+                        Coin coin2 = new Coin("Ethereum","GBP", 1.00);
+                        mDao.insert(coin);
+                        mDao.insert(coin2);
+
                         return null;
                     }
                 }

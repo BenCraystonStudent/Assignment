@@ -5,13 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
 
-    public PagerAdapter(@NonNull FragmentManager fm, int NumOfTabs) {
+    public PagerAdapter(@NonNull FragmentManager fm, int NumTabs) {
         super(fm);
-        this.mNumOfTabs = NumOfTabs;
+        this.mNumOfTabs = NumTabs;
     }
+
 
     @NonNull
     @Override
@@ -20,6 +21,17 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         {
             case 0: return new AllCurrencies();
             case 1: return new FavCurrencies();
+            default: return null;
+        }
+    }
+
+    @Override
+    public String getPageTitle(int position)
+    {
+        switch (position)
+        {
+            case 0: return "All Currencies";
+            case 1: return "Portfolio";
             default: return null;
         }
     }
