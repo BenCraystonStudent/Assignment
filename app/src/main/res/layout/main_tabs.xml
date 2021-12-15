@@ -4,33 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    >
 
-
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/all_currencies"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tabs_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/all_currencies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+             />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/all_currencies_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-
-
-
-
-
-
-
-
-
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
