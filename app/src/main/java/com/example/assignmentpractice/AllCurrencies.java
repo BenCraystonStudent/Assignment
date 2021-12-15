@@ -49,26 +49,20 @@ public class AllCurrencies extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        CoinViewModel mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
-        
+        aAdapter = new CoinListAdapter((AppCompatActivity) aContext, mCoinList);
         aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         aContext = container.getContext();
         aRecyclerView = aView.findViewById(R.id.recyclerview);
         LinearLayoutManager llm = new LinearLayoutManager(aContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         aRecyclerView.setLayoutManager(llm);
-        aAdapter = new CoinListAdapter((AppCompatActivity) aContext, coins);
         aRecyclerView.setAdapter(aAdapter);
 
-        mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>()
-        {
-            @Override
-            public void onChanged(@Nullable final List<Coin> coins) {
-                // Update the cached copy of the words in the adapter.
-                aAdapter.setCoins(coins);
-            }
-        });
-
+        try {
+            getHTTPData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return aView;
     }
 

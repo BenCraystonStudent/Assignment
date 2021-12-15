@@ -16,7 +16,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
 
-    public CoinListAdapter(Context context, List<Coin> mCoins)
+    public CoinListAdapter(Context context, List<Coin> mCoinList)
     {
         mInflater = LayoutInflater.from(context);
     }
