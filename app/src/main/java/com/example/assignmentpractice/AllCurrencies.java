@@ -49,20 +49,21 @@ public class AllCurrencies extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        aAdapter = new CoinListAdapter((AppCompatActivity) aContext, mCoinList);
-        aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         aContext = container.getContext();
+        aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         aRecyclerView = aView.findViewById(R.id.recyclerview);
-        LinearLayoutManager llm = new LinearLayoutManager(aContext);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        aRecyclerView.setLayoutManager(llm);
-        aRecyclerView.setAdapter(aAdapter);
-
         try {
             getHTTPData();
         } catch (IOException e) {
             e.printStackTrace();
+            mCoinList.add(new Coin("Failed to add coins!", "Currency", 0.0));
         }
+        LinearLayoutManager llm = new LinearLayoutManager(aContext);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        aAdapter = new CoinListAdapter((AppCompatActivity) aContext, mCoinList);
+        aRecyclerView.setLayoutManager(llm);
+        aRecyclerView.setAdapter(aAdapter);
+        aAdapter.setCoins(mCoinList);
         return aView;
     }
 
