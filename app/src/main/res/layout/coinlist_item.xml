@@ -35,5 +35,7 @@
         app:layout_constraintStart_toEndOf="@+id/CoinCurrency"
         app:layout_constraintTop_toTopOf="parent"/>
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
