@@ -18,6 +18,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
+    private CoinDAO mCoinDAO;
 
     public CoinListAdapter(Context context, List<Coin> mCoins)
     {
@@ -73,5 +74,19 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             CoinValue = itemView.findViewById(R.id.CoinValue);
             BorderedFav = itemView.findViewById(R.id.BorderedFav);
         }
+    }
+
+    public void AddFavouriteCurrency(final CoinListAdapter.CoinViewHolder viewHolder, final int position)
+    {
+        viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View row)
+            {
+                Coin coin = mCoins.get(position);
+                mCoinDAO.insert(coin);
+            }
+
+    });
     }
 }
