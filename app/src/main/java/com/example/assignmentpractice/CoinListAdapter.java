@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     public void onBindViewHolder(CoinViewHolder holder, int position) {
         if (mCoins != null) {
             Coin current = mCoins.get(position);
+          //TODO  StringUtils.capitalize(current.mCoin);
             holder.CoinItemView.setText(current.mCoin);
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
