@@ -5,13 +5,29 @@
     android:orientation="vertical"
     android:padding="6dp">
 
-<TextView
+    <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/Coin"
     android:textSize="24sp"
     android:textStyle="bold"
     />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CoinCurrency"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/CoinValue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
 
