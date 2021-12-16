@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,12 +64,14 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         private final TextView CoinItemView;
         private final TextView CoinCurrency;
         private final TextView CoinValue;
+        private final ImageButton BorderedFav;
 
         private CoinViewHolder(View itemView) {
             super(itemView);
             CoinItemView = itemView.findViewById(R.id.Coin);
             CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
             CoinValue = itemView.findViewById(R.id.CoinValue);
+            BorderedFav = itemView.findViewById(R.id.BorderedFav);
         }
     }
 }
