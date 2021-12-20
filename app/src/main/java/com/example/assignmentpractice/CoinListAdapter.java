@@ -7,18 +7,36 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Insert;
 
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
+class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
-    private CoinDAO mCoinDAO;
+    public CoinDAO mCoinDAO = new CoinDAO() {
+        @Override
+        public void insert(Coin coin) {
+
+        }
+
+        @Override
+        public void deleteAll() {
+
+        }
+
+        @Override
+        public LiveData<List<Coin>> getAllCoins() {
+            return null;
+        }
+    };
+
 
     public CoinListAdapter(Context context, List<Coin> mCoins)
     {
@@ -64,6 +82,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         else return 0;
     }
 
+
     class CoinViewHolder extends RecyclerView.ViewHolder {
         private final TextView CoinItemView;
         private final TextView CoinCurrency;
@@ -81,7 +100,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     public void AddFavouriteCurrency(final CoinListAdapter.CoinViewHolder viewHolder, final int position)
     {
-
         viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
         {
             @Override
