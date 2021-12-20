@@ -23,10 +23,14 @@ public class Coin {
     @ColumnInfo(name = "value")
     Double mValue;
 
-    public Coin(String coin_name,String currency, Double value){
+    @ColumnInfo(name = "isFavourite")
+    Boolean mFavourite;
+
+    public Coin(String coin_name,String currency, Double value, Boolean favourite){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;
+        this.mFavourite = favourite;
     }
 
     public Coin(){

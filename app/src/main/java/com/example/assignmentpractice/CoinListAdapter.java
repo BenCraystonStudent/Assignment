@@ -37,10 +37,11 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     public void onBindViewHolder(CoinViewHolder holder, int position) {
         if (mCoins != null) {
             Coin current = mCoins.get(position);
-          //TODO  StringUtils.capitalize(current.mCoin);
+            //TODO:StringUtils.capitalize(current.mCoin);
             holder.CoinItemView.setText(current.mCoin);
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
+            //holder.BorderedFav.;
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
