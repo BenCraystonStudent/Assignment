@@ -36,7 +36,7 @@ public class FavCurrencies extends Fragment {
 
         pView = inflater.inflate(R.layout.fragment_fav_currencies, container, false);
         pContext = container.getContext();
-        pRecyclerView = pView.findViewById(R.id.recyclerview);
+        pRecyclerView = pView.findViewById(R.id.p_recyclerview);
         LinearLayoutManager llm = new LinearLayoutManager(pContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         pRecyclerView.setLayoutManager(llm);

@@ -41,7 +41,9 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             holder.CoinItemView.setText(current.mCoin);
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
-            //holder.BorderedFav.;
+            holder.BorderedFav.setImageResource(R.drawable.ic_favourite_border);
+            AddFavouriteCurrency(holder, position);
+
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
@@ -79,6 +81,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     public void AddFavouriteCurrency(final CoinListAdapter.CoinViewHolder viewHolder, final int position)
     {
+
         viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -86,6 +89,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             {
                 Coin coin = mCoins.get(position);
                 mCoinDAO.insert(coin);
+                notifyDataSetChanged();
             }
 
     });

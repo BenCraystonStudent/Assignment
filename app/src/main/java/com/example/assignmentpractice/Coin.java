@@ -43,7 +43,7 @@ public class Coin {
     @NonNull
     @Override
     public String toString(){
-        return format(Locale.UK, "%1$-20s %2$.8f %3$s", mCoin, mValue, mCurrency);
+        return format(Locale.UK, "%1$-20s %2$.8f %3$s", mCoin, mValue, mCurrency, mFavourite);
     }
 
 }
