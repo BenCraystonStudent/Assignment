@@ -10,7 +10,7 @@ import java.util.List;
 @Dao
 public interface CoinDAO {
     @Insert
-    void insert (Coin coin);
+    void insert(Coin coin);
 
     @Query("DELETE FROM coin_table")
     void deleteAll();

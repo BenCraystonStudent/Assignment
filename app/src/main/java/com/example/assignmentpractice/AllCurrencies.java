@@ -41,6 +41,7 @@ public class AllCurrencies extends Fragment {
     private View aView;
     private Context aContext;
     private CoinViewModel mCoinViewModel;
+    public CoinDAO mCoinDAO;
 
     public AllCurrencies() {
         // Required empty public constructor

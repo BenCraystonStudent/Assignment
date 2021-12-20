@@ -16,27 +16,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.LinkedList;
 import java.util.List;
 
-class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
+class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> implements CoinDAO {
 
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
-    public CoinDAO mCoinDAO = new CoinDAO() {
-        @Override
-        public void insert(Coin coin) {
-
-        }
-
-        @Override
-        public void deleteAll() {
-
-        }
-
-        @Override
-        public LiveData<List<Coin>> getAllCoins() {
-            return null;
-        }
-    };
-
 
     public CoinListAdapter(Context context, List<Coin> mCoins)
     {
@@ -82,6 +65,21 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
         else return 0;
     }
 
+    @Override
+    public  void insert(Coin coin) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
+    public LiveData<List<Coin>> getAllCoins() {
+        return null;
+    }
+
 
     class CoinViewHolder extends RecyclerView.ViewHolder {
         private final TextView CoinItemView;
@@ -98,7 +96,7 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
         }
     }
 
-    public void AddFavouriteCurrency(final CoinListAdapter.CoinViewHolder viewHolder, final int position)
+    public void AddFavouriteCurrency(CoinListAdapter.CoinViewHolder viewHolder, int position)
     {
         viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
         {
@@ -106,7 +104,7 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
             public void onClick(View row)
             {
                 Coin coin = mCoins.get(position);
-                mCoinDAO.insert(coin);
+                insert(coin);
                 notifyDataSetChanged();
             }
 
