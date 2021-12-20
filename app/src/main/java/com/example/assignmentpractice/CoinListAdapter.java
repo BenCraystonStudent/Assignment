@@ -106,6 +106,7 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
                 Coin coin = mCoins.get(position);
                 insert(coin);
                 notifyDataSetChanged();
+                //TODO: Get reference to Database
             }
 
     });
