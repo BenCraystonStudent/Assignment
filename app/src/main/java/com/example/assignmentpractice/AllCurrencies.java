@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,6 +43,7 @@ public class AllCurrencies extends Fragment {
     private Context aContext;
     private CoinViewModel mCoinViewModel;
     public CoinDAO mCoinDAO;
+    private ImageButton fav;
 
     public AllCurrencies() {
         // Required empty public constructor
@@ -53,6 +55,8 @@ public class AllCurrencies extends Fragment {
         aContext = container.getContext();
         aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
         aRecyclerView = aView.findViewById(R.id.recyclerview);
+        fav = aView.findViewById(R.id.BorderedFav);
+
         try {
             getHTTPData();
         } catch (IOException e) {
@@ -73,6 +77,20 @@ public class AllCurrencies extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity();
+    }
+
+    public void AddFavouriteCurrency(CoinListAdapter.CoinViewHolder viewHolder, int position)
+    {
+        CoinViewModel mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
+        viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Coin coin = mCoinList.get(position);
+                mCoinViewModel.insert(coin);
+            }
+        });
     }
 
     void getHTTPData() throws IOException {

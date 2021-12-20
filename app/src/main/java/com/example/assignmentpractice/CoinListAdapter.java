@@ -1,5 +1,6 @@
 package com.example.assignmentpractice;
 
+import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Insert;
 
@@ -43,7 +48,6 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
             holder.BorderedFav.setImageResource(R.drawable.ic_favourite_border);
-            AddFavouriteCurrency(holder, position);
 
         } else {
             // Covers the case of data not being ready yet.
@@ -85,7 +89,7 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
         private final TextView CoinItemView;
         private final TextView CoinCurrency;
         private final TextView CoinValue;
-        private final ImageButton BorderedFav;
+        public final ImageButton BorderedFav;
 
         private CoinViewHolder(View itemView) {
             super(itemView);
@@ -96,19 +100,4 @@ class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolde
         }
     }
 
-    public void AddFavouriteCurrency(CoinListAdapter.CoinViewHolder viewHolder, int position)
-    {
-        viewHolder.BorderedFav.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View row)
-            {
-                Coin coin = mCoins.get(position);
-                insert(coin);
-                notifyDataSetChanged();
-                //TODO: Get reference to Database
-            }
-
-    });
-    }
 }
