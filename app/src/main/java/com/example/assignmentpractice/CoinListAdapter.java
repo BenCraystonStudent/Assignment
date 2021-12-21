@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +35,9 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         if (mCoins != null) {
             Coin current = mCoins.get(position);
             holder.CoinItemView.setText(current.mCoin);
+            holder.CoinCurrency.setText(current.mCurrency);
+            holder.CoinValue.setText(current.mValue.toString());
+            holder.FavImage.setImageResource(R.drawable.ic_favourite);
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
@@ -56,10 +60,16 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     class CoinViewHolder extends RecyclerView.ViewHolder {
         private final TextView CoinItemView;
+        private final TextView CoinCurrency;
+        private final TextView CoinValue;
+        private final ImageButton FavImage;
 
         private CoinViewHolder(View itemView) {
             super(itemView);
             CoinItemView = itemView.findViewById(R.id.Coin);
+            CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
+            CoinValue = itemView.findViewById(R.id.CoinValue);
+            FavImage = itemView.findViewById(R.id.FavImage);
         }
     }
 }
