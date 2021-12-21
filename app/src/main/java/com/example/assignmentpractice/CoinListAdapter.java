@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
 
+    public String INSERTED_COIN = "com.example.assignmentpractice.CLICKED_COIN";
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
     public CoinViewModel mCoinViewModel;
@@ -95,8 +97,11 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             int position = getAdapterPosition();
             Coin coin = adapter.getCoin(position);
 
-            Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
-            toast.show();
+           // Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
+           // toast.show();
+
+            Intent intent = new Intent();
+            intent.putExtra(INSERTED_COIN, coin.toString());
         }
     }
 }
