@@ -17,7 +17,7 @@ public class CoinRepository {
         mAllCoins = mCoinDao.getAllCoins();
     }
 
-    LiveData<List<Coin>> getAllCoins() {
+    public LiveData<List<Coin>> getAllCoins() {
         return mAllCoins;
     }
 
