@@ -40,7 +40,7 @@ public class AllCurrencies extends Fragment {
     private CoinListAdapter aAdapter;
     private View aView;
     private Context aContext;
-    private CoinViewModel mCoinViewModel;
+    private CoinViewModel aCoinViewModel;
 
     public AllCurrencies() {
         // Required empty public constructor
@@ -49,7 +49,7 @@ public class AllCurrencies extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-       // CoinViewModel mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
+        CoinViewModel aCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
     @Override
