@@ -47,6 +47,12 @@ public class AllCurrencies extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        CoinViewModel mCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         aContext = container.getContext();
