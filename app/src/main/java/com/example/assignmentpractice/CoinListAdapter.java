@@ -16,6 +16,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
+    public CoinViewModel mCoinViewModel;
 
     public CoinListAdapter(Context context, List<Coin> mCoins)
     {
@@ -49,6 +50,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         notifyDataSetChanged();
     }
 
+
+
     // getItemCount() is called many times, and when it is first called,
     // mCoins has not been updated (means initially, it's null, and we can't return null).
     @Override
@@ -57,6 +60,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             return mCoins.size();
         else return 0;
     }
+
 
     class CoinViewHolder extends RecyclerView.ViewHolder {
         private final TextView CoinItemView;
@@ -71,5 +75,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             CoinValue = itemView.findViewById(R.id.CoinValue);
             FavImage = itemView.findViewById(R.id.FavImage);
         }
+
+
     }
 }
+

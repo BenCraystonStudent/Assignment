@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +42,7 @@ public class AllCurrencies extends Fragment {
     private View aView;
     private Context aContext;
     private CoinViewModel aCoinViewModel;
+    private ImageButton aFavButton;
 
     public AllCurrencies() {
         // Required empty public constructor
@@ -70,6 +72,13 @@ public class AllCurrencies extends Fragment {
         aRecyclerView.setLayoutManager(llm);
         aRecyclerView.setAdapter(aAdapter);
         aAdapter.setCoins(mCoinList);
+        aFavButton = aView.findViewById(R.id.FavImage);
+        aFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return aView;
     }
 
@@ -78,6 +87,8 @@ public class AllCurrencies extends Fragment {
         super.onResume();
         getActivity();
     }
+
+
 
     void getHTTPData() throws IOException {
         /* https://www.coingecko.com/api/documentations/v3#/ */
