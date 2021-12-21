@@ -1,6 +1,7 @@
 package com.example.assignmentpractice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +20,16 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     private List<Coin> mCoins; // Cached copy of Coins
     public CoinViewModel mCoinViewModel;
     Context context;
+    CoinListAdapter adapter = this;
 
-    public CoinListAdapter(Context context, List<Coin> mCoins)
-    {
+    public CoinListAdapter(Context context, List<Coin> mCoins) {
+        super();
         mInflater = LayoutInflater.from(context);
     }
 
-    public Coin getCoin(int position){
+    public Coin getCoin(int position) {
         return mCoins.get(position);
     }
-
 
 
     @Override
@@ -45,17 +46,18 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
             holder.FavImage.setImageResource(R.drawable.ic_favourite);
+
+            holder.FavImage.setTag(current);
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
         }
     }
 
-    void setCoins(List<Coin> Coins){
+    void setCoins(List<Coin> Coins) {
         mCoins = Coins;
         notifyDataSetChanged();
     }
-
 
 
     // getItemCount() is called many times, and when it is first called,
@@ -68,7 +70,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     }
 
 
-    class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView CoinItemView;
         private final TextView CoinCurrency;
@@ -89,9 +91,14 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
         @Override
         public void onClick(View view) {
-           Toast toast = Toast.makeText(view.getContext(), "Hello", Toast.LENGTH_SHORT);
-           toast.show();
+
+            int position = getAdapterPosition();
+            Coin coin = adapter.getCoin(position);
+
+            Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }
+
 
