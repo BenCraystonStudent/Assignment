@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,10 +18,15 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
     public CoinViewModel mCoinViewModel;
+    Context context;
 
     public CoinListAdapter(Context context, List<Coin> mCoins)
     {
         mInflater = LayoutInflater.from(context);
+    }
+
+    public Coin getCoin(int position){
+        return mCoins.get(position);
     }
 
 
@@ -62,7 +68,8 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     }
 
 
-    class CoinViewHolder extends RecyclerView.ViewHolder {
+    class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
         private final TextView CoinItemView;
         private final TextView CoinCurrency;
         private final TextView CoinValue;
@@ -70,13 +77,21 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
         private CoinViewHolder(View itemView) {
             super(itemView);
+            context = itemView.getContext();
             CoinItemView = itemView.findViewById(R.id.Coin);
             CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
             CoinValue = itemView.findViewById(R.id.CoinValue);
             FavImage = itemView.findViewById(R.id.FavImage);
+
+            FavImage.setOnClickListener(this);
         }
 
 
+        @Override
+        public void onClick(View view) {
+           Toast toast = Toast.makeText(view.getContext(), "Hello", Toast.LENGTH_SHORT);
+           toast.show();
+        }
     }
 }
 

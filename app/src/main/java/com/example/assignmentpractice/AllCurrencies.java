@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,7 @@ public class AllCurrencies extends Fragment {
     private RecyclerView aRecyclerView;
     private CoinListAdapter aAdapter;
     private View aView;
+    private View aCoinListItem;
     private Context aContext;
     private CoinViewModel aCoinViewModel;
     private ImageButton aFavButton;
@@ -52,6 +54,15 @@ public class AllCurrencies extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         CoinViewModel aCoinViewModel = new ViewModelProvider(this).get(CoinViewModel.class);
+
+       /* aFavButton = aCoinListItem.findViewById(R.id.FavImage);
+        aFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(aContext, "Hello", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });*/
     }
 
     @Override
@@ -72,13 +83,6 @@ public class AllCurrencies extends Fragment {
         aRecyclerView.setLayoutManager(llm);
         aRecyclerView.setAdapter(aAdapter);
         aAdapter.setCoins(mCoinList);
-        aFavButton = aView.findViewById(R.id.FavImage);
-        aFavButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         return aView;
     }
 
@@ -86,6 +90,11 @@ public class AllCurrencies extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity();
+    }
+
+    public void InsertCoinToRepo()
+    {
+        aCoinViewModel.insert(aAdapter.getCoin(0));
     }
 
 
