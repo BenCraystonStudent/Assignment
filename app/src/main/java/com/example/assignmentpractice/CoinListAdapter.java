@@ -1,5 +1,8 @@
 package com.example.assignmentpractice;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -17,7 +20,9 @@ import java.util.List;
 
 public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
 
-    public String INSERTED_COIN = "com.example.assignmentpractice.CLICKED_COIN";
+    public static final String INSERTED_COIN_NAME = "com.example.assignmentpractice.INSERTED_COINNAME";
+    public static final String INSERTED_COIN_CURRENCY = "com.example.assignmentpractice.INSERTED_COIN_CURRENCY";
+    public static final String INSERTED_COIN_VALUE = "com.example.assignmentpractice.INSERTED_COIN_VALUE";
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
     public CoinViewModel mCoinViewModel;
@@ -101,7 +106,13 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
            // toast.show();
 
             Intent intent = new Intent();
-            intent.putExtra(INSERTED_COIN, coin.toString());
+            intent.putExtra(INSERTED_COIN_NAME, coin.mCoin);
+            intent.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
+            intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);
+
+
+            ((Activity) context).setResult(RESULT_OK, intent);
+            ((Activity) context).finish();
         }
     }
 }

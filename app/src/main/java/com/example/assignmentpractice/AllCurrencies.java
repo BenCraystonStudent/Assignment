@@ -1,6 +1,9 @@
 package com.example.assignmentpractice;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,6 +48,7 @@ public class AllCurrencies extends Fragment {
     private Context aContext;
     private CoinViewModel aCoinViewModel;
     private ImageButton aFavButton;
+    public int ADD_COIN_REQUEST = 1;
 
     public AllCurrencies() {
         // Required empty public constructor
@@ -92,10 +96,25 @@ public class AllCurrencies extends Fragment {
         getActivity();
     }
 
-    public void InsertCoinToRepo()
+  //  public void InsertCoinToRepo()
     {
-        aCoinViewModel.insert(aAdapter.getCoin(0));
+   //     aCoinViewModel.insert(aAdapter.getCoin(0));
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent){
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK){
+            String receivedCoinName = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_NAME);
+            String receivedCoinCurrency = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_CURRENCY);
+            Double receivedValue = intent.getDoubleExtra(CoinListAdapter.INSERTED_COIN_VALUE, 1);
+
+            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, receivedValue);
+            aCoinViewModel.insert(coin);
+        }
+    }
+
+
 
 
 
