@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -42,6 +44,7 @@ public class AllCurrencies extends Fragment {
     private final LinkedList<Coin> mCoinList = new LinkedList<>();
     private final LinkedList<Coin> coins = new LinkedList<>();
     private RecyclerView aRecyclerView;
+    private Activity activity;
     private CoinListAdapter aAdapter;
     private View aView;
     private View aCoinListItem;
@@ -104,15 +107,21 @@ public class AllCurrencies extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK) {
             String receivedCoinName = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_NAME);
             String receivedCoinCurrency = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_CURRENCY);
             Double receivedValue = intent.getDoubleExtra(CoinListAdapter.INSERTED_COIN_VALUE, 1);
 
             Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, receivedValue);
-            aCoinViewModel.insert(coin);
+           // aCoinViewModel.insert(coin);
+            Toast toast = Toast.makeText(this.getContext(), receivedCoinName, Toast.LENGTH_SHORT);
+            toast.show();
+        } else {
+            Toast toast = Toast.makeText(this.getContext(), "WTF RICHARD", Toast.LENGTH_SHORT);
+            toast.show();
+            }
         }
-    }
+
 
 
 
