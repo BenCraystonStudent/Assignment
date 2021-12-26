@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 public class CoinAdder extends AppCompatActivity {
     private CoinViewModel cvm;
@@ -15,6 +16,7 @@ public class CoinAdder extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_all_currencies);
+        cvm = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
     @Override
