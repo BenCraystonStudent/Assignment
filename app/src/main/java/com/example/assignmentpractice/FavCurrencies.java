@@ -40,7 +40,7 @@ public class FavCurrencies extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(pContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         pRecyclerView.setLayoutManager(llm);
-        pAdapter = new PortfolioListAdapter( pContext, coins);
+        pAdapter = new PortfolioListAdapter(pContext, coins);
         pRecyclerView.setAdapter(pAdapter);
 
         mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>()

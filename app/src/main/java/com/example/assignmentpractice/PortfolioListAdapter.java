@@ -8,12 +8,13 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
-    private List<Coin> mCoins; // Cached copy of Coins
+    private List<Coin> mCoins = new ArrayList<>(); //new list for Favourites
 
     public PortfolioListAdapter(Context context, List<Coin> mCoins)
     {

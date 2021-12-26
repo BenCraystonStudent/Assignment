@@ -17,7 +17,7 @@ public class CoinViewModel extends AndroidViewModel {
         mAllCoins = mRepository.getAllCoins();
     }
 
-    LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
+    public LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
 
     public void insert(Coin coin) { mRepository.insert(coin); }
 }
