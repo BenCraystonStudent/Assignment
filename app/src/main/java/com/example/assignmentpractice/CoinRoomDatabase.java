@@ -61,15 +61,15 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
                         // Start the app with a clean database every time.
                         // Not needed if you only populate the database
                         // when it is first created
-                        if(mDao.getAllCoins().getValue().isEmpty()){
+                        if(mDao.getAllCoins() == null)
                             for (int i = 0; i <= coins.length - 1; i++)
                             {
                                 Coin coin = new Coin("bdf", "fsdfsf", 0.1);
+                                mDao.insert(coin);
                             }
-                        }
-
                         return null;
+                        }
                     }
                 }
-            }
+
 
