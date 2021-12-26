@@ -104,27 +104,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
             int position = getAdapterPosition();
             Coin coin = adapter.getCoin(position);
-
-           //Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
-           //toast.show();
-
-            //view.getContext().startActivity(new Intent(view.getContext(), CoinAdder.class));
-
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(INSERTED_COIN_NAME, coin.mCoin);
-            intent.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
-            intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);
-
-            //activity.startActivity(intent);
-           // ((Activity) context).startActivity(intent);
-
-            ((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
-
-            //((Activity) context).setResult(RESULT_OK, intent);
-            //((Activity) context).startActivity(new Intent(intent));
-            //((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
-            ((Activity) context).finish();
-            //activity.startActivity(new Intent(activity, AllCurrencies.class));
         }
     }
 }
