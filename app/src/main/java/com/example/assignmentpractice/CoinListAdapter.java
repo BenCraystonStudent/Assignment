@@ -118,11 +118,12 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             //activity.startActivity(intent);
            // ((Activity) context).startActivity(intent);
 
-
-            ((Activity) context).setResult(RESULT_OK, intent);
-            //((Activity) context).startActivity(new Intent(intent));
             ((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
-            //((Activity) context).finish();
+
+            //((Activity) context).setResult(RESULT_OK, intent);
+            //((Activity) context).startActivity(new Intent(intent));
+            //((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
+            ((Activity) context).finish();
             //activity.startActivity(new Intent(activity, AllCurrencies.class));
         }
     }
