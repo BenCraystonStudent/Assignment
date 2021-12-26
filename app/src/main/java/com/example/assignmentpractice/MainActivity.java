@@ -90,22 +90,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
     };
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK) {
-            String receivedCoinName = getIntent().getStringExtra(CoinListAdapter.INSERTED_COIN_NAME);
-            String receivedCoinCurrency = getIntent().getStringExtra(INSERTED_COIN_CURRENCY);
-            Double receivedValue = getIntent().getDoubleExtra(INSERTED_COIN_VALUE, 1);
 
-            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, receivedValue);
-            cvm.insert(coin);
-            Toast toast = Toast.makeText(getLayoutInflater().getContext(), intent.getStringExtra(INSERTED_COIN_NAME), Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(getLayoutInflater().getContext(), "WTF RICHARD", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-    }
 
 }
