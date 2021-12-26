@@ -118,6 +118,9 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
                 intent.putExtra("coinValue", stringedDouble);
 
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+                mCoins.remove(getAdapterPosition());
+                notifyItemRemoved(getAdapterPosition());
                 break;
 
                 case R.id.InfoImage:
