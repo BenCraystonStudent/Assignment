@@ -19,6 +19,8 @@ public class CoinAdder extends AppCompatActivity {
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
