@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         super();
         mInflater = LayoutInflater.from(context);
         this.activity = activity;
-        this.mContext = mContext;
+        this.context = context;
     }
 
 
@@ -110,20 +111,22 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
 
             //view.getContext().startActivity(new Intent(view.getContext(), CoinAdder.class));
 
-            Intent intent = new Intent(context, MainActivity.class);
-            intent.putExtra(INSERTED_COIN_NAME, coin.mCoin);
-            intent.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
-            intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);
+            Intent intent = new Intent("addCoin");
+            intent.putExtra("coinName", coin.mCoin);
+            intent.putExtra("coinCurrency", coin.mCurrency);
+            String stringedDouble = coin.mValue.toString();
+            intent.putExtra("coinValue", stringedDouble);
+
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
             //activity.startActivity(intent);
            // ((Activity) context).startActivity(intent);
-
-            ((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
-
-            //((Activity) context).setResult(RESULT_OK, intent);
+           // ((Activity) context).setResult(RESULT_OK, intent);
+           // ((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
             //((Activity) context).startActivity(new Intent(intent));
             //((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
-            ((Activity) context).finish();
+           // ((Activity) context).finish();
+
             //activity.startActivity(new Intent(activity, AllCurrencies.class));
         }
     }
