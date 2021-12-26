@@ -104,7 +104,7 @@ public class AllCurrencies extends Fragment {
    //     aCoinViewModel.insert(aAdapter.getCoin(0));
     }
 
-    @Override
+/*    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent){
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK) {
@@ -120,7 +120,7 @@ public class AllCurrencies extends Fragment {
             Toast toast = Toast.makeText(this.getContext(), "WTF RICHARD", Toast.LENGTH_SHORT);
             toast.show();
             }
-        }
+        }*/
 
 
 

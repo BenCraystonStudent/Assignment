@@ -103,7 +103,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
            //Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
            //toast.show();
 
-            Intent intent = new Intent(context, AllCurrencies.class);
+            Intent intent = new Intent(context, CoinAdder.class);
             intent.putExtra(INSERTED_COIN_NAME, coin.mCoin);
             intent.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
             intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);

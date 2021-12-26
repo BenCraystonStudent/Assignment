@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
         <activity
-            android:name=".AllCurrencies"
-            tools:ignore="Instantiatable" />
+            android:name=".CoinAdder"
+             />
         <activity
             android:name=".MainActivity"
             android:exported="true">
