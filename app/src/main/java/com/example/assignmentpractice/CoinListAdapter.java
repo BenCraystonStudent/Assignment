@@ -27,11 +27,15 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     Context context;
     CoinListAdapter adapter = this;
     private Activity activity;
+    private Context mContext;
 
     public CoinListAdapter(Context context, List<Coin> mCoins) {
         super();
         mInflater = LayoutInflater.from(context);
+        this.activity = activity;
+        this.mContext = mContext;
     }
+
 
     public Coin getCoin(int position) {
         return mCoins.get(position);
@@ -104,15 +108,18 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
            //Toast toast = Toast.makeText(context, coin.toString(), Toast.LENGTH_SHORT);
            //toast.show();
 
-           // view.getContext().startActivity(new Intent(view.getContext(), CoinAdder.class));
+            //view.getContext().startActivity(new Intent(view.getContext(), CoinAdder.class));
 
-            Intent intent = new Intent(context, CoinAdder.class);
+            Intent intent = new Intent(context, MainActivity.class);
             intent.putExtra(INSERTED_COIN_NAME, coin.mCoin);
             intent.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
             intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);
 
+            //activity.startActivity(intent);
+
 
             ((Activity) context).setResult(RESULT_OK, intent);
+            //((Activity) context).startActivity(new Intent(intent));
             ((Activity) context).startActivityForResult(intent, ADD_COIN_REQUEST);
             //((Activity) context).finish();
             //activity.startActivity(new Intent(activity, AllCurrencies.class));

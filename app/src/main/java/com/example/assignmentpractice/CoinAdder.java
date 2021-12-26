@@ -1,5 +1,8 @@
 package com.example.assignmentpractice;
 
+import static com.example.assignmentpractice.CoinListAdapter.INSERTED_COIN_CURRENCY;
+import static com.example.assignmentpractice.CoinListAdapter.INSERTED_COIN_VALUE;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -16,26 +19,15 @@ public class CoinAdder extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_all_currencies);
+        Intent data = getIntent();
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
     }
 
+  // private void AddCoin(){
+  //      Intent data = new Intent();
+  //      data.putExtra(INSERTED_COIN_NAME, coin.mCoin);
+  //      data.putExtra(INSERTED_COIN_CURRENCY, coin.mCurrency);
+  //      data.putExtra(INSERTED_COIN_VALUE, coin.mValue);
+  //  }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent){
-        super.onActivityResult(requestCode, resultCode, intent);
-        if (requestCode == ADD_COIN_REQUEST && resultCode == RESULT_OK) {
-            String receivedCoinName = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_NAME);
-            String receivedCoinCurrency = intent.getStringExtra(CoinListAdapter.INSERTED_COIN_CURRENCY);
-            Double receivedValue = intent.getDoubleExtra(CoinListAdapter.INSERTED_COIN_VALUE, 1);
-
-            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, receivedValue);
-            cvm.insert(coin);
-            Toast toast = Toast.makeText(this, receivedCoinName, Toast.LENGTH_SHORT);
-            toast.show();
-        } else {
-            Toast toast = Toast.makeText(this, "WTF RICHARD", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-    }
 }
