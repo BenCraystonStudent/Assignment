@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinViewHolder> {
 
-    public static final String INSERTED_COIN_NAME = "com.example.assignmentpractice.INSERTED_COINNAME";
+    public static final String INSERTED_COIN_NAME = "com.example.assignmentpractice.INSERTED_COIN_NAME";
     public static final String INSERTED_COIN_CURRENCY = "com.example.assignmentpractice.INSERTED_COIN_CURRENCY";
     public static final String INSERTED_COIN_VALUE = "com.example.assignmentpractice.INSERTED_COIN_VALUE";
     public static final int ADD_COIN_REQUEST = 1;
@@ -116,6 +116,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             intent.putExtra(INSERTED_COIN_VALUE, coin.mValue);
 
             //activity.startActivity(intent);
+           // ((Activity) context).startActivity(intent);
 
 
             ((Activity) context).setResult(RESULT_OK, intent);
