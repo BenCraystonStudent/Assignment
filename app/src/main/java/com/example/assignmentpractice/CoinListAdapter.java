@@ -124,7 +124,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
                 break;
 
                 case R.id.InfoImage:
-                    //TODO
+                    ((Activity) context).startActivity(new Intent(context, CoinInfo.class));
                     break;
 
        }
