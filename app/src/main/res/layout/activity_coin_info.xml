@@ -6,9 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".CoinInfo">
 
-<com.jjoe64.graphview.GraphView
-android:layout_width="match_parent"
-android:layout_height="200dip"
-android:id="@+id/graph" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/currencyDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="130dp"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
