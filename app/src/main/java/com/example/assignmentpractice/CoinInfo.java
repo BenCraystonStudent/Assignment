@@ -44,7 +44,7 @@ public class CoinInfo extends AppCompatActivity {
             e.printStackTrace();
         }
         currencyDescription = findViewById(R.id.currencyDescription);
-        currencyDescription.setText("Fuck off");
+        currencyDescription.setText("Hello");
     }
 
 
