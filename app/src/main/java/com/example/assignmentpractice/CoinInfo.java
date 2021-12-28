@@ -37,7 +37,6 @@ import java.util.Objects;
 
 public class CoinInfo extends AppCompatActivity {
     private TextView currencyDescription;
-    private CoinPOJO geckoCoin;
     private String desc;
 
     @Override
