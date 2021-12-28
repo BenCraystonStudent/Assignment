@@ -17,13 +17,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +40,13 @@ public class CoinInfo extends AppCompatActivity {
     private TextView currencyDescription;
     private String desc;
     private String receivedCoinNameInfo;
+    private String img;
+    private ImageView coinImage;
+    private Context context;
+
+  //  public CoinInfo(Context context){
+  //      this.context = context;
+  //  }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +99,8 @@ public class CoinInfo extends AppCompatActivity {
                 try {
                     JSONObject JSONData = new JSONObject(myResponse);
                     JSONObject data = (JSONObject) JSONData.get("description");
+                    JSONObject imagedata = (JSONObject) JSONData.get("image");
+                    img = imagedata.getString("small");
                     desc = data.getString("en");
 
                 } catch (JSONException e) {
@@ -103,6 +111,7 @@ public class CoinInfo extends AppCompatActivity {
                     Log.d("OkHTTPResponse", myResponse);
                     currencyDescription = findViewById(R.id.currencyDescription);
                     currencyDescription.setText(desc);
+                    coinImage = findViewById(R.id.coinImagexml);
                 });
             }
 
