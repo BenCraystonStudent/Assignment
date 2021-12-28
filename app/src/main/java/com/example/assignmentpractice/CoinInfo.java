@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -10,13 +11,15 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.android.material.tabs.TabLayout;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -38,11 +41,17 @@ import java.util.Objects;
 public class CoinInfo extends AppCompatActivity {
     private TextView currencyDescription;
     private String desc;
+    private String receivedCoinNameInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
+        Bundle extras = getIntent().getExtras();
+        receivedCoinNameInfo = extras.getString("coinName_info");
+       // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
+       // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
+       // toast.show();
         try {
             getHTTPData();
         } catch (IOException e) {
@@ -50,13 +59,22 @@ public class CoinInfo extends AppCompatActivity {
         }
     }
 
+   // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
+   //     @Override
+   //     public void onReceive(Context context, Intent intent_info) {
+   //         receivedCoinNameInfo = intent_info.getStringExtra("coinName_info");
+   //     }
+  //  };
+
 
     void getHTTPData() throws IOException {
         /* https://www.coingecko.com/api/documentations/v3#/ */
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder =
-                Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false"))
+                Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/"+receivedCoinNameInfo+"?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false"))
                         .newBuilder();
+
+       // urlBuilder.addQueryParameter("ids", receivedCoinName);
 
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder()

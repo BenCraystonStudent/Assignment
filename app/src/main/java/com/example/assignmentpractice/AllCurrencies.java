@@ -3,6 +3,7 @@ package com.example.assignmentpractice;
 import static android.app.Activity.RESULT_OK;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,10 +53,12 @@ public class AllCurrencies extends Fragment {
     private CoinViewModel aCoinViewModel;
     private ImageButton aFavButton;
     public int ADD_COIN_REQUEST = 1;
+    private String receivedCoinName;
 
     public AllCurrencies() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
