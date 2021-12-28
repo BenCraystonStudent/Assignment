@@ -49,9 +49,6 @@ public class CoinInfo extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        currencyDescription = findViewById(R.id.currencyDescription);
-        currencyDescription.setText(desc);
     }
 
 
@@ -79,8 +76,8 @@ public class CoinInfo extends AppCompatActivity {
 
                 try {
                     JSONObject JSONData = new JSONObject(myResponse);
-                    JSONObject data = (JSONObject) JSONData.get("description: en:");
-                    desc = data.toString();
+                    JSONObject data = (JSONObject) JSONData.get("description");
+                    desc = data.getString("en");
 
                 } catch (JSONException e) {
                     Log.d("OkHTTPResponse", "JSON Format Problem");
@@ -88,7 +85,8 @@ public class CoinInfo extends AppCompatActivity {
                 }
                 runOnUiThread(() -> {
                     Log.d("OkHTTPResponse", myResponse);
-
+                    currencyDescription = findViewById(R.id.currencyDescription);
+                    currencyDescription.setText(desc);
                 });
             }
 
