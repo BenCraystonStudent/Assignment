@@ -15,6 +15,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import org.json.JSONStringer;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -43,6 +45,7 @@ public class CoinInfo extends AppCompatActivity {
     private String img;
     private ImageView coinImage;
     private Context context;
+    private Drawable smallImg;
 
   //  public CoinInfo(Context context){
   //      this.context = context;
@@ -101,6 +104,9 @@ public class CoinInfo extends AppCompatActivity {
                     JSONObject data = (JSONObject) JSONData.get("description");
                     JSONObject imagedata = (JSONObject) JSONData.get("image");
                     img = imagedata.getString("small");
+                    URL ImgURL = new URL(imagedata.getString("small"));
+                    smallImg = Drawable.createFromStream(ImgURL.openStream(), img);
+
                     desc = data.getString("en");
 
                 } catch (JSONException e) {
@@ -111,7 +117,9 @@ public class CoinInfo extends AppCompatActivity {
                     Log.d("OkHTTPResponse", myResponse);
                     currencyDescription = findViewById(R.id.currencyDescription);
                     currencyDescription.setText(desc);
-                    coinImage = findViewById(R.id.coinImagexml);
+                    coinImage = (ImageView)findViewById(R.id.coinImagexml);
+                    coinImage.setImageDrawable(smallImg);
+
                 });
             }
 
