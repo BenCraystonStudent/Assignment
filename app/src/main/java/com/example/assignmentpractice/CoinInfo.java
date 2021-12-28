@@ -14,6 +14,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.android.material.tabs.TabLayout;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -27,12 +30,15 @@ import org.json.JSONStringer;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 
 //TODO: Add selected currency to the URI
 
 public class CoinInfo extends AppCompatActivity {
     private TextView currencyDescription;
+    private CoinPOJO geckoCoin;
+    private String desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +49,9 @@ public class CoinInfo extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         currencyDescription = findViewById(R.id.currencyDescription);
-        currencyDescription.setText("Hello");
+        currencyDescription.setText(desc);
     }
 
 
@@ -72,8 +79,8 @@ public class CoinInfo extends AppCompatActivity {
 
                 try {
                     JSONObject JSONData = new JSONObject(myResponse);
-                    String parsedDescription = JSONData.get("description").toString();
-
+                    JSONObject data = (JSONObject) JSONData.get("description: en:");
+                    desc = data.toString();
 
                 } catch (JSONException e) {
                     Log.d("OkHTTPResponse", "JSON Format Problem");
