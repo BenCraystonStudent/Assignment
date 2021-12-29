@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import okhttp3.Call;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,13 +41,14 @@ import java.util.Objects;
 
 
 public class CoinInfo extends AppCompatActivity {
-    private TextView currencyDescription;
+    private TextView currencyDescription, currencyHeader;
     private String desc;
     private String receivedCoinNameInfo;
     private String img;
     private ImageView coinImage;
     private Context context;
-    private Drawable smallImg;
+    private Drawable largeImg;
+    private Toolbar coininfotoolbar;
 
   //  public CoinInfo(Context context){
   //      this.context = context;
@@ -55,6 +58,11 @@ public class CoinInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
+        coininfotoolbar = findViewById(R.id.coin_info_toolbar);
+        currencyHeader = findViewById(R.id.currencyHeader);
+        currencyDescription = findViewById(R.id.currencyDescription);
+        coinImage = (ImageView)findViewById(R.id.coinImagexml);
+        setSupportActionBar(coininfotoolbar);
         Bundle extras = getIntent().getExtras();
         receivedCoinNameInfo = extras.getString("coinName_info");
        // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
@@ -103,9 +111,9 @@ public class CoinInfo extends AppCompatActivity {
                     JSONObject JSONData = new JSONObject(myResponse);
                     JSONObject data = (JSONObject) JSONData.get("description");
                     JSONObject imagedata = (JSONObject) JSONData.get("image");
-                    img = imagedata.getString("small");
-                    URL ImgURL = new URL(imagedata.getString("small"));
-                    smallImg = Drawable.createFromStream(ImgURL.openStream(), img);
+                    img = imagedata.getString("large");
+                    URL ImgURL = new URL(imagedata.getString("large"));
+                    largeImg = Drawable.createFromStream(ImgURL.openStream(), img);
 
                     desc = data.getString("en");
 
@@ -115,11 +123,9 @@ public class CoinInfo extends AppCompatActivity {
                 }
                 runOnUiThread(() -> {
                     Log.d("OkHTTPResponse", myResponse);
-                    currencyDescription = findViewById(R.id.currencyDescription);
                     currencyDescription.setText(desc);
-                    coinImage = (ImageView)findViewById(R.id.coinImagexml);
-                    coinImage.setImageDrawable(smallImg);
-
+                    coinImage.setImageDrawable(largeImg);
+                    currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
                 });
             }
 

@@ -12,9 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
-        <receiver android:name=".CoinInfo">
-
-        </receiver>
         <activity
             android:name=".CoinInfo"
             android:exported="true" />

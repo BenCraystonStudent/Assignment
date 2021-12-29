@@ -7,24 +7,47 @@
     tools:context=".CoinInfo">
 
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/coin_info_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        tools:ignore="MissingConstraints" />
+
+
     <TextView
         android:id="@+id/currencyDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/coinImagexml" />
 
     <ImageView
         android:id="@+id/coinImagexml"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:background="#C5CAE9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coin_info_toolbar"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/currencyHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="TextView"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/currencyDescription"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
