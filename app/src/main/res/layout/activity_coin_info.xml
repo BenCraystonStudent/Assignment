@@ -17,14 +17,23 @@
         tools:ignore="MissingConstraints" />
 
 
-    <TextView
-        android:id="@+id/currencyDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:id="@+id/currencyDescriptionScrollable"
+        android:layout_width="413dp"
+        android:layout_height="421dp"
+        android:scrollbars="vertical"
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coinImagexml" />
+        app:layout_constraintTop_toBottomOf="@+id/coinImagexml">
+
+        <TextView
+            android:id="@+id/currencyDescription"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="" />
+
+    </ScrollView>
 
     <ImageView
         android:id="@+id/coinImagexml"
@@ -42,11 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="4dp"
-        android:text="TextView"
+        android:text=""
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
-        app:layout_constraintBottom_toTopOf="@+id/currencyDescription"
+        app:layout_constraintBottom_toTopOf="@+id/currencyDescriptionScrollable"
         app:layout_constraintStart_toStartOf="parent" />
 
 

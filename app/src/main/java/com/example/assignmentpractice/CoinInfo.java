@@ -19,7 +19,9 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +43,8 @@ import java.util.Objects;
 
 
 public class CoinInfo extends AppCompatActivity {
-    private TextView currencyDescription, currencyHeader;
+    private TextView currencyHeader, currencyDescription;
+    private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
     private String img;
@@ -59,8 +62,9 @@ public class CoinInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
         coininfotoolbar = findViewById(R.id.coin_info_toolbar);
-        currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescription = findViewById(R.id.currencyDescription);
+        currencyHeader = findViewById(R.id.currencyHeader);
+        currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
         Bundle extras = getIntent().getExtras();
@@ -124,6 +128,7 @@ public class CoinInfo extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Log.d("OkHTTPResponse", myResponse);
                     currencyDescription.setText(desc);
+                   // currencyDescriptionScrollable.addView(currencyDescription);
                     coinImage.setImageDrawable(largeImg);
                     currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
                 });
