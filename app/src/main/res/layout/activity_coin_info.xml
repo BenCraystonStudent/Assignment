@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="end"
     android:orientation="vertical"
     tools:context=".CoinInfo">
 
@@ -46,7 +47,8 @@
     <ScrollView
         android:id="@+id/currencyDescriptionScrollable"
         android:layout_width="match_parent"
-        android:layout_height="299dp"
+        android:layout_height="375dp"
+        android:layout_weight="1"
         android:scrollbars="vertical"
         android:text=""
         app:layout_constraintTop_toBottomOf="@+id/coinImagexml">
@@ -60,10 +62,21 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_gravity="end"
+        android:paddingVertical="16dp"
+        android:text="Buy">
+
+    </Button>
+
+    <Button
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="Set">
+
+    </Button>
 
 
 </LinearLayout>
