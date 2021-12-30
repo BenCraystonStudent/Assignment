@@ -1,6 +1,7 @@
 package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -14,12 +15,18 @@ import okhttp3.Response;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -43,6 +50,7 @@ import java.util.Objects;
 
 
 public class CoinInfo extends AppCompatActivity {
+    private Button buyButton, setButton;
     private TextView currencyHeader, currencyDescription;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
@@ -65,6 +73,24 @@ public class CoinInfo extends AppCompatActivity {
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
+        buyButton = findViewById(R.id.buyBtn);
+        buyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(CoinInfo.this);
+                alert.setTitle("Hello");
+                final EditText input = new EditText(CoinInfo.this);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for OK button here
+                    }
+                });
+                alert.show();
+            }
+        });
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
         Bundle extras = getIntent().getExtras();
@@ -143,6 +169,9 @@ public class CoinInfo extends AppCompatActivity {
 
 
         });
+    }
+
+    public void BuyCrypto(View view) {
     }
 }
 
