@@ -61,6 +61,7 @@ public class CoinInfo extends AppCompatActivity {
     private Drawable largeImg;
     private Toolbar coininfotoolbar;
     private EditText dialogInput;
+    private CoinViewModel cvm;
 
   //  public CoinInfo(Context context){
   //      this.context = context;

@@ -20,4 +20,5 @@ public class CoinViewModel extends AndroidViewModel {
     public LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
 
     public void insert(Coin coin) { mRepository.insert(coin); }
+
 }
