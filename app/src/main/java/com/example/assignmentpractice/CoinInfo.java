@@ -63,6 +63,7 @@ public class CoinInfo extends AppCompatActivity {
     private EditText dialogInput;
     private CoinViewModel cvm;
     private BuyCurrency bc;
+    private CoinDAO dao;
 
   //  public CoinInfo(Context context){
   //      this.context = context;
@@ -88,7 +89,8 @@ public class CoinInfo extends AppCompatActivity {
                 bc.DisplayBuyCurrency(CoinInfo.this, new BuyCurrency.BuyCurrencyInterface() {
                     @Override
                     public void PassValues(String coinname, Double amount) {
-                        cvm.update(amount, coinname);
+                        cvm.update(coinname, amount);
+                        Log.d("Show Coins", dao.getAllCoins().toString());
                     }
                 }, receivedCoinNameInfo);
             }

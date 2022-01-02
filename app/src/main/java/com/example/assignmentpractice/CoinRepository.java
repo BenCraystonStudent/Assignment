@@ -26,10 +26,9 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
-    public void update(Double c_held, String coin_name) {
+    public void update(String coin_name, Double c_held) {
         mCoinDao.update(c_held, coin_name);
     }
-
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
 
         private CoinDAO mAsyncTaskDao;
