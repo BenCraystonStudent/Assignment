@@ -12,9 +12,9 @@ import androidx.appcompat.app.AlertDialog;
 public class BuyCurrency {
 
     public interface BuyCurrencyInterface {
-        public void PassValues (String coinname, Double amount);
+        public void PassValues (String coin_name, Double amount);
     }
-    public AlertDialog DisplayBuyCurrency (Context context, final BuyCurrencyInterface buyInterface, String coin_name)
+    public AlertDialog DisplayBuyCurrency (Context context, String coin_name, final BuyCurrencyInterface buyInterface)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -29,7 +29,7 @@ public class BuyCurrency {
                 EditText amount = (EditText)xml.findViewById(R.id.amountEntered);
 
                 buyInterface.PassValues(coin.getText().toString(), Double.parseDouble(amount.getText().toString()));
-                dialog.cancel();
+                dialog.dismiss();
             }
 
         });

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import okhttp3.Call;
@@ -77,6 +78,7 @@ public class CoinInfo extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         receivedCoinNameInfo = extras.getString("coinName_info");
+        cvm = new ViewModelProvider(this).get(CoinViewModel.class);
         coininfotoolbar = findViewById(R.id.coin_info_toolbar);
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
@@ -86,13 +88,10 @@ public class CoinInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 BuyCurrency bc = new BuyCurrency();
-                bc.DisplayBuyCurrency(CoinInfo.this, new BuyCurrency.BuyCurrencyInterface() {
-                    @Override
-                    public void PassValues(String coinname, Double amount) {
-                        cvm.update(coinname, amount);
-                        Log.d("Show Coins", dao.getAllCoins().toString());
-                    }
-                }, receivedCoinNameInfo);
+                bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin_name, amount) -> {
+                    cvm.update(coin_name, amount);
+                    Log.d("Show Coins", cvm.getAllCoins().toString());
+                });
             }
         });
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
