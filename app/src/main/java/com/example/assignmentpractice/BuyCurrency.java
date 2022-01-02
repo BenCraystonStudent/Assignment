@@ -14,7 +14,7 @@ public class BuyCurrency {
     public interface BuyCurrencyInterface {
         public void PassValues (String coinname, Double amount);
     }
-    public AlertDialog DisplayBuyCurrency (Context context, BuyCurrencyInterface buyInterface, String coin_name)
+    public AlertDialog DisplayBuyCurrency (Context context, final BuyCurrencyInterface buyInterface, String coin_name)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);

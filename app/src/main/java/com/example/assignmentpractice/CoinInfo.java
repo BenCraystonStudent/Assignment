@@ -72,6 +72,10 @@ public class CoinInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info);
+
+
+        Bundle extras = getIntent().getExtras();
+        receivedCoinNameInfo = extras.getString("coinName_info");
         coininfotoolbar = findViewById(R.id.coin_info_toolbar);
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
@@ -80,24 +84,17 @@ public class CoinInfo extends AppCompatActivity {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CoinInfo.this);
-                alert.setTitle("Please Enter Amount");
-                final EditText input = new EditText(CoinInfo.this);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-
+                BuyCurrency bc = new BuyCurrency();
+                bc.DisplayBuyCurrency(CoinInfo.this, new BuyCurrency.BuyCurrencyInterface() {
+                    @Override
+                    public void PassValues(String coinname, Double amount) {
+                        cvm.update(amount, coinname);
                     }
-                });
-                alert.show();
+                }, receivedCoinNameInfo);
             }
         });
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
-        Bundle extras = getIntent().getExtras();
-        receivedCoinNameInfo = extras.getString("coinName_info");
        // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
        // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
        // toast.show();
