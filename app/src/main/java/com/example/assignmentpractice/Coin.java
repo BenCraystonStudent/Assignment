@@ -23,10 +23,14 @@ public class Coin {
     @ColumnInfo(name = "value")
     Double mValue;
 
-    public Coin(String coin_name,String currency, Double value){
+    @ColumnInfo(name = "currency_held")
+    Double mCurrencyHeld;
+
+    public Coin(String coin_name,String currency, Double value, Double c_held){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;
+        this.mCurrencyHeld = c_held;
     }
 
     public Coin(){
