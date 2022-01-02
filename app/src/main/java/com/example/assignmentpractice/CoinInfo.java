@@ -60,6 +60,7 @@ public class CoinInfo extends AppCompatActivity {
     private Context context;
     private Drawable largeImg;
     private Toolbar coininfotoolbar;
+    private EditText dialogInput;
 
   //  public CoinInfo(Context context){
   //      this.context = context;
@@ -78,14 +79,14 @@ public class CoinInfo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(CoinInfo.this);
-                alert.setTitle("Hello");
+                alert.setTitle("Please Enter Amount");
                 final EditText input = new EditText(CoinInfo.this);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
+
                     }
                 });
                 alert.show();
