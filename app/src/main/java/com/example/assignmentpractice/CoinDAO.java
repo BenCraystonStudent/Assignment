@@ -17,4 +17,8 @@ public interface CoinDAO {
 
     @Query("SELECT * from coin_table ORDER BY coin_name ASC")
     LiveData<List<Coin>> getAllCoins();
+
+    @Query("UPDATE coin_table SET currency_held =:c_held WHERE coin_name =:coin_name")
+    void update(Double c_held, String coin_name);
+
 }
