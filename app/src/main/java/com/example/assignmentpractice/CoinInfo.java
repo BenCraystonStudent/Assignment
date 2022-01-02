@@ -62,6 +62,7 @@ public class CoinInfo extends AppCompatActivity {
     private Toolbar coininfotoolbar;
     private EditText dialogInput;
     private CoinViewModel cvm;
+    private BuyCurrency bc;
 
   //  public CoinInfo(Context context){
   //      this.context = context;
