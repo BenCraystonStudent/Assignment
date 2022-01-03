@@ -39,7 +39,7 @@ public class CurrencySearch extends AppCompatActivity {
         setContentView(R.layout.activity_currency_search);
 
 
-        sView.setQueryHint("");
+       // sView.setQueryHint("Search...");
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -53,50 +53,7 @@ public class CurrencySearch extends AppCompatActivity {
         searchRecycler.setAdapter(sAdapter);
 
 
-            OkHttpClient client = new OkHttpClient();
-            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/" + query).newBuilder());
 
-            String url = urlBuilder.build().toString();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    Log.d("Response Failed", "Nothing sent back from CoinGecko");
-                    call.cancel();
-                }
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    final String myResponse = Objects.requireNonNull(response.body(), "Response Received").string();
-                    Log.d("OkHTTPResponse", "API Call Successful");
-                    response.close();
-
-                    try {
-                        JSONObject oJSON = new JSONObject(myResponse);
-                        searchedCoins.clear();
-
-                        double CoinValue;
-                        /* Build the list of coins from API Data */
-                        for (Iterator<String> it = oJSON.keys(); it.hasNext(); ) {
-                            String coinName = it.next();
-                            CoinValue = oJSON.getJSONObject(coinName).getDouble("gbp");
-                            searchedCoins.add(new Coin(coinName, "gbp", CoinValue, 0.0));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.d("OkHTTPResponse", "JSON Format Problem");
-                    }
-
-                    runOnUiThread(() -> {
-                        Log.d("OkHTTPResponse", myResponse);
-                        searchedCoins.sort(new SortByCoinName());
-                        sAdapter.setCoins(searchedCoins);
-                    });
-                }
-            });
         }
     }
 }
