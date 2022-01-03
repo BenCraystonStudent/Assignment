@@ -57,6 +57,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
             holder.FavImage.setImageResource(R.drawable.ic_favourite);
+            holder.InfoImage.setImageResource(R.drawable.ic_info);
 
             holder.FavImage.setTag(current);
         } else {
@@ -87,6 +88,7 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         private final TextView CoinCurrency;
         private final TextView CoinValue;
         private final ImageButton FavImage;
+        private final ImageButton InfoImage;
 
         private CoinViewHolder(View itemView) {
             super(itemView);
@@ -95,24 +97,49 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
             CoinValue = itemView.findViewById(R.id.CoinValue);
             FavImage = itemView.findViewById(R.id.FavImage);
+            InfoImage = itemView.findViewById((R.id.InfoImage));
 
             FavImage.setOnClickListener(this);
+            InfoImage.setOnClickListener(this);
         }
 
 
         @Override
         public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.FavImage:
+                int position = getAdapterPosition();
+                Coin coin = adapter.getCoin(position);
 
-            int position = getAdapterPosition();
-            Coin coin = adapter.getCoin(position);
+                Intent intent = new Intent("addCoin");
+                intent.putExtra("coinName", coin.mCoin);
+                intent.putExtra("coinCurrency", coin.mCurrency);
+                String stringedDouble = coin.mValue.toString();
+                intent.putExtra("coinValue", stringedDouble);
 
-            Intent intent = new Intent("addCoin");
-            intent.putExtra("coinName", coin.mCoin);
-            intent.putExtra("coinCurrency", coin.mCurrency);
-            String stringedDouble = coin.mValue.toString();
-            intent.putExtra("coinValue", stringedDouble);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
 
-            LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                mCoins.remove(getAdapterPosition());
+                notifyItemRemoved(getAdapterPosition());
+                break;
+
+                case R.id.InfoImage:
+                    int position_info = getAdapterPosition();
+                    Coin coin_info = adapter.getCoin(position_info);
+
+                    Intent i = new Intent(context, CoinInfo.class);
+                    i.putExtra("coinName_info", coin_info.mCoin);
+                    context.startActivity(i);
+
+                  //  Intent intent_info = new Intent("getCoinInfo");
+                  //  intent_info.putExtra("coinName_info", coin_info.mCoin);
+
+                   // LocalBroadcastManager.getInstance((Activity) context).sendBroadcast(intent_info);
+
+                   // ((Activity) context).startActivity(new Intent(context, CoinInfo.class));
+                    break;
+
+       }
 
         }
     }

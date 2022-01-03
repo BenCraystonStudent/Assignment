@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import java.util.List;
 
-@Database(entities = {Coin.class}, version = 2, exportSchema = false)
+@Database(entities = {Coin.class}, version = 3, exportSchema = false)
 public abstract class CoinRoomDatabase extends RoomDatabase {
     public abstract CoinDAO coinDao();
     private static CoinRoomDatabase INSTANCE;
@@ -61,16 +61,15 @@ public abstract class CoinRoomDatabase extends RoomDatabase {
                         // Start the app with a clean database every time.
                         // Not needed if you only populate the database
                         // when it is first created
-                        mDao.deleteAll();
-
-
-                        Coin coin = new Coin("Bitcoin","GBP", 1.00);
-                        Coin coin2 = new Coin("Ethereum","GBP", 1.00);
-                        mDao.insert(coin);
-                        mDao.insert(coin2);
-
+                        if(mDao.getAllCoins() == null)
+                            for (int i = 0; i <= coins.length - 1; i++)
+                            {
+                                Coin coin = new Coin("bdf", "fsdfsf", 0.1, 0.0);
+                                mDao.insert(coin);
+                            }
                         return null;
+                        }
                     }
                 }
-            }
+
 

@@ -15,6 +15,7 @@ public class CoinRepository {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
         mCoinDao = db.coinDao();
         mAllCoins = mCoinDao.getAllCoins();
+
     }
 
     public LiveData<List<Coin>> getAllCoins() {
@@ -23,6 +24,10 @@ public class CoinRepository {
 
     public void insert (Coin coin) {
         new insertAsyncTask(mCoinDao).execute(coin);
+    }
+
+    public void update(String coin_name, Double c_held) {
+        mCoinDao.update(c_held, coin_name);
     }
 
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
