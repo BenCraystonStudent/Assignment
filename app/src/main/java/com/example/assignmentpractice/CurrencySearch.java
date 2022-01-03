@@ -55,7 +55,7 @@ public class CurrencySearch extends AppCompatActivity {
         }
 
             OkHttpClient client = new OkHttpClient();
-            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/" + received_query + "?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false").newBuilder());
+            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/simple/price?ids=" + received_query + "&vs_currencies=gbp").newBuilder());
 
             String url = urlBuilder.build().toString();
             Request request = new Request.Builder()
