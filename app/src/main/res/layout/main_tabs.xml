@@ -18,7 +18,19 @@
             android:id="@+id/tabs_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/circular_background"
+                android:src="@drawable/ic_profile"
+
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.Toolbar>
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/all_currencies"
