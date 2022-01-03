@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,13 +33,15 @@ public class CurrencySearch extends AppCompatActivity {
     private CoinListAdapter sAdapter;
     private LinkedList<Coin> searchedCoins = new LinkedList<>();
     private SearchView sView;
-    private String query;
+    private String received_query;
+    public SearchManager searchManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_search);
 
+        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         sAdapter  = new CoinListAdapter((AppCompatActivity) this, searchedCoins);
         searchRecycler = findViewById(R.id.recyclerview);
@@ -48,11 +51,11 @@ public class CurrencySearch extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            query = intent.getStringExtra(SearchManager.QUERY);
+            received_query = intent.getStringExtra(searchManager.QUERY);
         }
 
             OkHttpClient client = new OkHttpClient();
-            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/" + query).newBuilder());
+            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/" + received_query + "?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false").newBuilder());
 
             String url = urlBuilder.build().toString();
             Request request = new Request.Builder()
@@ -62,7 +65,7 @@ public class CurrencySearch extends AppCompatActivity {
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    Log.d("Response Failed", "Nothing sent back from CoinGecko");
+                    Log.d("OkHTTPResponse", "Nothing sent back from CoinGecko");
                     call.cancel();
                 }
 

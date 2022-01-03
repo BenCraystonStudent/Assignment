@@ -57,21 +57,25 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
     public static final int ADD_COIN_REQUEST = 1;
-    private SearchView searchView;
+    public SearchView searchView;
+    public SearchManager searchManager;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tabs);
+        searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = findViewById(R.id.search_view);
         searchView.setQueryHint("Search Currencies....");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Intent intent = new Intent(MainActivity.this, CurrencySearch.class);
+                Intent intent = new Intent(getApplicationContext(), CurrencySearch.class);
+                intent.putExtra("query", query);
+                intent.setAction(Intent.ACTION_SEARCH);
                 startActivity(intent);
-                return true;
+                return false;
             }
 
             @Override
