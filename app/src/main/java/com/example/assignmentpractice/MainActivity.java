@@ -65,8 +65,20 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tabs);
         searchView = findViewById(R.id.search_view);
+        searchView.setQueryHint("Search Currencies....");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Intent intent = new Intent(MainActivity.this, CurrencySearch.class);
+                startActivity(intent);
+                return true;
+            }
 
-        //searchView.setQueryHint("Search Currencies....");
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
 
         LocalBroadcastManager.getInstance(this).registerReceiver(CoinReceiver, new IntentFilter("addCoin"));
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
@@ -112,58 +124,5 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         }
     };
 
-    public void SearchCurrencies() {
 
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-
-            OkHttpClient client = new OkHttpClient();
-            HttpUrl.Builder urlBuilder = Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/" + query).newBuilder());
-
-            String url = urlBuilder.build().toString();
-            Request request = new Request.Builder()
-                    .url(url)
-                    .build();
-
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                    Log.d("Response Failed", "Nothing sent back from CoinGecko");
-                    call.cancel();
-                }
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    final String myResponse = Objects.requireNonNull(response.body(), "Response Received").string();
-                    Log.d("OkHTTPResponse", "API Call Successful");
-                    response.close();
-
-                    try {
-                        JSONObject oJSON = new JSONObject(myResponse);
-                        searchedCoins.clear();
-
-                        double CoinValue;
-                        /* Build the list of coins from API Data */
-                        for (Iterator<String> it = oJSON.keys(); it.hasNext(); ) {
-                            String coinName = it.next();
-                            CoinValue = oJSON.getJSONObject(coinName).getDouble("gbp");
-                            searchedCoins.add(new Coin(coinName, "gbp", CoinValue, 0.0));
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Log.d("OkHTTPResponse", "JSON Format Problem");
-                    }
-
-                    runOnUiThread(() -> {
-                        Log.d("OkHTTPResponse", myResponse);
-                        searchedCoins.sort(new SortByCoinName());
-                        sAdapter.setCoins(searchedCoins);
-                    });
-                }
-            });
-        }
-
-
-    }
 }
