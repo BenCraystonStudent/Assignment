@@ -2,6 +2,7 @@ package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,12 +31,15 @@ public class CurrencySearch extends AppCompatActivity {
     private RecyclerView searchRecycler;
     private CoinListAdapter sAdapter;
     private LinkedList<Coin> searchedCoins;
-    private View sView;
+    private SearchView sView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_search);
+
+
+        sView.setQueryHint("");
 
         Intent intent = getIntent();
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
@@ -88,7 +92,6 @@ public class CurrencySearch extends AppCompatActivity {
 
                     runOnUiThread(() -> {
                         Log.d("OkHTTPResponse", myResponse);
-                        /* Update spinner with new coin data */
                         searchedCoins.sort(new SortByCoinName());
                         sAdapter.setCoins(searchedCoins);
                     });

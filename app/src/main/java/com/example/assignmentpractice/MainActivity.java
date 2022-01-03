@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -40,12 +41,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public ViewPager mViewPager;
     private PagerAdapter mPagerAdapter;
     public static final int ADD_COIN_REQUEST = 1;
+    private SearchView searchView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tabs);
+        searchView = findViewById(R.id.search_view);
+
+        searchView.setQueryHint("Search Currencies....");
+
         LocalBroadcastManager.getInstance(this).registerReceiver(CoinReceiver, new IntentFilter("addCoin"));
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
         TabLayout mainTabs = findViewById(R.id.all_currencies);
