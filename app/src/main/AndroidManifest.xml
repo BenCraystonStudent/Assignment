@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
         <activity
+            android:name=".CurrencySearch"
+            android:exported="true" />
+        <activity
             android:name=".CoinInfo"
             android:exported="true" />
         <activity
