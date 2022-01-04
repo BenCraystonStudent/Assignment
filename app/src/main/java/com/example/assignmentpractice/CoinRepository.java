@@ -26,10 +26,10 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
-    public void update(Coin coin) {
-        mCoinDao.update(coin);
-        new updateAsyncTask(mCoinDao).execute(coin);
-    }
+   // public void update(Coin coin) {
+   //     mCoinDao.update(coin);
+    //    new updateAsyncTask(mCoinDao).execute(coin);
+  //  }
 
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
 

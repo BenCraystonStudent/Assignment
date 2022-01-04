@@ -89,7 +89,7 @@ public class CoinInfo extends AppCompatActivity {
             public void onClick(View v) {
                 BuyCurrency bc = new BuyCurrency();
                 bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin_name, amount) -> {
-                    cvm.update(coin_name, amount);
+                    cvm.UpdateCurrencyHeld(coin_name, amount);
                     Log.d("Show Coins", cvm.getAllCoins().toString());
                 });
             }
