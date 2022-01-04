@@ -21,7 +21,7 @@ public class FavCurrencies extends Fragment {
     private final LinkedList<String> mCoinList = new LinkedList<>();
     private final LinkedList<Coin> coins = new LinkedList<>();
     private RecyclerView pRecyclerView;
-    private PortfolioListAdapter pAdapter;
+    private CoinListAdapter pAdapter;
     private View pView;
     private Context pContext;
 
@@ -40,7 +40,7 @@ public class FavCurrencies extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(pContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         pRecyclerView.setLayoutManager(llm);
-        pAdapter = new PortfolioListAdapter(pContext, coins);
+        pAdapter = new CoinListAdapter(pContext, coins);
         pRecyclerView.setAdapter(pAdapter);
 
         mCoinViewModel.getAllCoins().observe(getViewLifecycleOwner(), new Observer<List<Coin>>()
