@@ -50,10 +50,11 @@ public class CoinRepository {
         Double c_held;
         String coin_name;
 
-        UpdateParams(Double c_held, String coin_name){
+        public UpdateParams(Double c_held, String coin_name){
             this.c_held = c_held;
             this.coin_name = coin_name;
         }
+
     }
 
     public void UpdateCurrencyHeld(Double c_held, String coin_name){
@@ -65,10 +66,10 @@ public class CoinRepository {
     {
         private CoinDAO uAsyncTaskDao;
 
-        updateAsyncTask(CoinDAO dao){uAsyncTaskDao = dao;}
+        public updateAsyncTask(CoinDAO dao){uAsyncTaskDao = dao;}
 
         @Override
-        protected Void doInBackground(Coin... params)
+        protected Void doInBackground(final Coin... params)
         {
             Double amount = params[0].mCurrencyHeld;
             String name = params[0].mCoin;
