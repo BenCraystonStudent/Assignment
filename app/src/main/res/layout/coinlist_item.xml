@@ -20,7 +20,7 @@
         android:id="@+id/CoinCurrency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         android:layout_marginLeft="24dp"
         app:layout_constraintStart_toEndOf="@+id/Coin"
@@ -30,10 +30,19 @@
         android:id="@+id/CoinValue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/CoinCurrency"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/AmountHeld"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/CoinValue"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageButton
         android:layout_width="wrap_content"

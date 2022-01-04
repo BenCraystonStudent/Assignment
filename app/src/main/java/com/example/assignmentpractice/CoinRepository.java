@@ -68,12 +68,13 @@ public class CoinRepository {
         updateAsyncTask(CoinDAO dao){uAsyncTaskDao = dao;}
 
         @Override
-        protected Void doInBackground(final Coin... params)
+        protected Void doInBackground(Coin... params)
         {
             Double amount = params[0].mCurrencyHeld;
             String name = params[0].mCoin;
             uAsyncTaskDao.update(amount, name);
             return null;
         }
+
     }
 }
