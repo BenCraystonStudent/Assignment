@@ -12,14 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
-        <activity android:name=".CurrencySearch"
+        <activity
+            android:name=".UserProfile"
+            android:exported="true" />
+        <activity
+            android:name=".CurrencySearch"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.SEARCH" />
-        </intent-filter>
-        <meta-data android:name="android.app.default_searchable"
-            android:value="CurrencySearch"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
 
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="CurrencySearch" />
         </activity>
         <activity
             android:name=".CoinInfo"
@@ -30,10 +35,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.default_searchable"
-                android:value="MainActivity"/>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="MainActivity" />
         </activity>
     </application>
 

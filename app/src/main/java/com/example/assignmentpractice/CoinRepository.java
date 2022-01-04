@@ -46,25 +46,27 @@ public class CoinRepository {
         }
     }
 
-    private static class UpdateParams{
-        Double c_held;
-        String coin_name;
-
-        public UpdateParams(Double c_held, String coin_name){
-            this.c_held = c_held;
-            this.coin_name = coin_name;
-        }
-
-    }
-
     public void UpdateCurrencyHeld(Double c_held, String coin_name){
-        UpdateParams params = new UpdateParams(c_held, coin_name);
+        updateAsyncTask.UpdateParams params = new updateAsyncTask.UpdateParams(c_held, coin_name);
         new updateAsyncTask(mCoinDao).execute((Runnable) params);
     }
 
+
+
     private static class updateAsyncTask extends AsyncTask<Coin, Void, Void>
     {
-        private CoinDAO uAsyncTaskDao;
+        public CoinDAO uAsyncTaskDao;
+
+        private static class UpdateParams{
+            Double c_held;
+            String coin_name;
+
+            public UpdateParams(Double c_held, String coin_name){
+                this.c_held = c_held;
+                this.coin_name = coin_name;
+            }
+
+        }
 
         public updateAsyncTask(CoinDAO dao){uAsyncTaskDao = dao;}
 
