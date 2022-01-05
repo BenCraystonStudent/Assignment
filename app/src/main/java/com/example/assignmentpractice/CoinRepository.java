@@ -10,6 +10,7 @@ import java.util.List;
 public class CoinRepository {
     private CoinDAO mCoinDao;
     private LiveData<List<Coin>> mAllCoins;
+    private Coin templateCoin;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
@@ -47,8 +48,11 @@ public class CoinRepository {
     }
 
     public void UpdateCurrencyHeld(Double c_held, String coin_name){
+        templateCoin = new Coin();
+        templateCoin.mCoin = coin_name;
+        templateCoin.mCurrencyHeld = c_held;
         updateAsyncTask.UpdateParams params = new updateAsyncTask.UpdateParams(c_held, coin_name);
-        new updateAsyncTask(mCoinDao).execute((Runnable) params);
+        new updateAsyncTask(mCoinDao).execute(templateCoin);
     }
 
 
