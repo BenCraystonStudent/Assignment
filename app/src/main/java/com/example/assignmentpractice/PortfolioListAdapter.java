@@ -34,6 +34,8 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         if (mCoins != null) {
             Coin current = mCoins.get(position);
             holder.CoinItemView.setText(current.mCoin);
+            holder.AmountHeld.setText(current.mCurrencyHeld.toString());
+            holder.CoinCurrency.setText(current.mCurrency);
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
@@ -56,10 +58,15 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
 
     class CoinViewHolder extends RecyclerView.ViewHolder {
         private final TextView CoinItemView;
+        private final TextView AmountHeld;
+        private final TextView CoinCurrency;
+
 
         private CoinViewHolder(View itemView) {
             super(itemView);
             CoinItemView = itemView.findViewById(R.id.Coin);
+            AmountHeld = itemView.findViewById(R.id.AmountHeld);
+            CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
         }
     }
 }
