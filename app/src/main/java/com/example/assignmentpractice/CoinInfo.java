@@ -66,6 +66,7 @@ public class CoinInfo extends AppCompatActivity {
     private CoinViewModel cvm;
     private BuyCurrency bc;
     private CoinDAO dao;
+    private String gbpPrice;
 
 
   //  public CoinInfo(Context context){
@@ -148,6 +149,9 @@ public class CoinInfo extends AppCompatActivity {
                     JSONObject JSONData = new JSONObject(myResponse);
                     JSONObject data = (JSONObject) JSONData.get("description");
                     JSONObject imagedata = (JSONObject) JSONData.get("image");
+                    JSONObject priceData = (JSONObject) JSONData.get("market_data");
+                    JSONObject JSONPrices = priceData.getJSONObject("current_price");
+                    gbpPrice = JSONPrices.getString("gbp");
                     img = imagedata.getString("large");
                     URL ImgURL = new URL(imagedata.getString("large"));
                     largeImg = Drawable.createFromStream(ImgURL.openStream(), img);
@@ -178,7 +182,16 @@ public class CoinInfo extends AppCompatActivity {
         });
     }
 
-    public void BuyCrypto(View view) {
+    public void AddCrypto(View view) {
+        Intent intent = new Intent("addCoin");
+        intent.putExtra("coinName", receivedCoinNameInfo);
+        intent.putExtra("coinCurrency", "gbp");
+       // String stringedDouble = coin.mValue.toString();
+        intent.putExtra("coinValue", gbpPrice);
+
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+
     }
 }
 
