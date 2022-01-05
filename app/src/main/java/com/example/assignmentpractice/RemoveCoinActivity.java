@@ -3,6 +3,7 @@ package com.example.assignmentpractice;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class RemoveCoinActivity extends AppCompatActivity {
@@ -18,7 +19,8 @@ public class RemoveCoinActivity extends AppCompatActivity {
         RemoveCoin rc = new RemoveCoin();
         rc.RemoveCurrency(this, receivedCoinNameInfo, coin_name1 -> {
             cvm.removeCoin(coin_name1);
-            notify();
+            Intent i = new Intent(this, MainActivity.class);
+            this.startActivity(i);
         });
 
     }

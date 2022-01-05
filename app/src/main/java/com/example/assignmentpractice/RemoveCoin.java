@@ -3,6 +3,7 @@ package com.example.assignmentpractice;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class RemoveCoin {
                 coin.setText(coin_name);
                 removeCoinInterface.PassValues(coin.getText().toString());
                 dialog.dismiss();
+
             }
         });
         builder.setNegativeButton("Cancel", null);
