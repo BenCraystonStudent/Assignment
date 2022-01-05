@@ -6,15 +6,15 @@
     android:orientation="vertical"
     android:padding="6dp">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/Coin"
-    android:textSize="24sp"
-    android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Coin"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/CoinCurrency"
@@ -44,14 +44,14 @@
         app:layout_constraintStart_toEndOf="@+id/CoinValue"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ImageButton
+        android:id="@+id/unfavImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/FavImage"
-        android:src="@drawable/ic_favourite"
+        android:src="@drawable/ic_unfav"
         app:layout_constraintEnd_toStartOf="@id/InfoImage"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:layout_width="wrap_content"
