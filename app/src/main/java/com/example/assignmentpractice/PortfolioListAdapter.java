@@ -1,12 +1,14 @@
 package com.example.assignmentpractice;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,14 +17,20 @@ import java.util.List;
 public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
+    private CoinViewModel cvm;
     private List<Coin> mCoins = new ArrayList<>(); //new list for Favourites
+    PortfolioListAdapter adapter = this;
+    Context context;
 
     public PortfolioListAdapter(Context context, List<Coin> mCoins)
     {
         mInflater = LayoutInflater.from(context);
+        context = this.context;
     }
 
-
+    public Coin getCoin(int position) {
+        return mCoins.get(position);
+    }
 
     @Override
     public CoinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,7 +67,7 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         else return 0;
     }
 
-    class CoinViewHolder extends RecyclerView.ViewHolder {
+    class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView CoinItemView;
         private final TextView AmountHeld;
         private final TextView CoinCurrency;
@@ -75,8 +83,25 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
             CoinValue = itemView.findViewById(R.id.CoinValue);
             UnfavImage = itemView.findViewById(R.id.unfavImage);
 
-           // FavImage.setOnClickListener(this);
+            UnfavImage.setOnClickListener(this);
           //  InfoImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Coin coin = adapter.getCoin(position);
+            String coin_name = coin.mCoin;
+
+            cvm = new ViewModelProvider().get(CoinViewModel.class);
+            RemoveCoin rc = new RemoveCoin();
+            rc.RemoveCurrency(context, coin_name, coin_name1 ->{
+                cvm.UpdateCurrencyHeld(coin, amount);
+                notify();
+            } );
+
+            }
+        }
         }
     }
 }

@@ -67,8 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:paddingVertical="16dp"
-        android:onClick="AddCrypto"
-        android:text="Add">
+        android:onClick="BuyCrypto"
+        android:text="Buy">
 
     </Button>
 

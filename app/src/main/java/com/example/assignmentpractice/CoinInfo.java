@@ -89,17 +89,17 @@ public class CoinInfo extends AppCompatActivity {
         addButton = findViewById(R.id.addBtn);
 
 
-          //  buyButton.setOnClickListener(new View.OnClickListener() {
-          //      @Override
-          //      public void onClick(View v) {
-          //          BuyCurrency bc = new BuyCurrency();
-          //          bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
-          //              cvm.UpdateCurrencyHeld(coin, amount);
-          //              notify();
-          //              Log.d("Show Coins", cvm.getAllCoins().toString());
-          //          });
-          //      }
-          //  });
+         /*   buyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BuyCurrency bc = new BuyCurrency();
+                    bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
+                        cvm.UpdateCurrencyHeld(coin, amount);
+                        notify();
+                        Log.d("Show Coins", cvm.getAllCoins().toString());
+                    });
+                }
+            }); */
 
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
