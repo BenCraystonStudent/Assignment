@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -25,7 +26,8 @@ public class BuyCurrency {
         builder.setPositiveButton("Buy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                EditText coin = (EditText)xml.findViewById(R.id.currencyName);
+                TextView coin = (TextView) xml.findViewById(R.id.currencyName);
+                coin.setText(coin_name);
                 EditText amount = (EditText)xml.findViewById(R.id.amountEntered);
 
                 buyInterface.PassValues(coin.getText().toString(), Double.parseDouble(amount.getText().toString()));

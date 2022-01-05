@@ -52,7 +52,7 @@ import java.util.Objects;
 
 public class CoinInfo extends AppCompatActivity {
     private Button buyButton, setButton;
-    private TextView currencyHeader, currencyDescription;
+    private TextView currencyHeader, currencyDescription, currencyName;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -84,17 +84,20 @@ public class CoinInfo extends AppCompatActivity {
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
         buyButton = findViewById(R.id.buyBtn);
-        buyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BuyCurrency bc = new BuyCurrency();
-                bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin_name, amount) -> {
-                    cvm.UpdateCurrencyHeld(coin_name, amount);
-                    notify();
-                    Log.d("Show Coins", cvm.getAllCoins().toString());
-                });
-            }
-        });
+
+
+            buyButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BuyCurrency bc = new BuyCurrency();
+                    bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
+                        cvm.UpdateCurrencyHeld(coin, amount);
+                        notify();
+                        Log.d("Show Coins", cvm.getAllCoins().toString());
+                    });
+                }
+            });
+
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
        // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
