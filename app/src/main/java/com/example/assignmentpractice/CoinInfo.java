@@ -89,17 +89,17 @@ public class CoinInfo extends AppCompatActivity {
         buyButton = findViewById(R.id.buyBtn);
 
 
-            buyButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    BuyCurrency bc = new BuyCurrency();
-                    bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
-                        cvm.UpdateCurrencyHeld(coin, amount);
-                        notify();
-                        Log.d("Show Coins", cvm.getAllCoins().toString());
-                    });
-                }
-            });
+          //  buyButton.setOnClickListener(new View.OnClickListener() {
+          //      @Override
+          //      public void onClick(View v) {
+          //          BuyCurrency bc = new BuyCurrency();
+          //          bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
+          //              cvm.UpdateCurrencyHeld(coin, amount);
+          //              notify();
+          //              Log.d("Show Coins", cvm.getAllCoins().toString());
+          //          });
+          //      }
+          //  });
 
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
@@ -125,7 +125,7 @@ public class CoinInfo extends AppCompatActivity {
         /* https://www.coingecko.com/api/documentations/v3#/ */
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder urlBuilder =
-                Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/"+receivedCoinNameInfo+"?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false"))
+                Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/"+receivedCoinNameInfo+"?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"))
                         .newBuilder();
 
        // urlBuilder.addQueryParameter("ids", receivedCoinName);
