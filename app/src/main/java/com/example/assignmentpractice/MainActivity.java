@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             Double coinValueDouble = Double.parseDouble(receivedCoinValue);
             Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, coinValueDouble, 0.0);
             cvm.insert(coin);
-            Toast toast = Toast.makeText(MainActivity.this, receivedCoinName, Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(MainActivity.this, receivedCoinName + " added to Portfolio", Toast.LENGTH_SHORT);
             toast.show();
         }
     };

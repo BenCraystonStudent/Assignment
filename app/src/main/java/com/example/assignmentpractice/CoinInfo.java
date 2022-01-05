@@ -190,6 +190,10 @@ public class CoinInfo extends AppCompatActivity {
         intent.putExtra("coinValue", gbpPrice);
 
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+        Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo + " added to Portfolio", Toast.LENGTH_SHORT);
+        toast.show();
+
+        finish();
 
 
     }
