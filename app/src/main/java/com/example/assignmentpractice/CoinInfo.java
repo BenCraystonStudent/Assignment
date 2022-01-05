@@ -49,6 +49,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 
+import java.util.Calendar;
 
 public class CoinInfo extends AppCompatActivity {
     private Button buyButton, setButton;
@@ -65,6 +66,7 @@ public class CoinInfo extends AppCompatActivity {
     private CoinViewModel cvm;
     private BuyCurrency bc;
     private CoinDAO dao;
+
 
   //  public CoinInfo(Context context){
   //      this.context = context;
