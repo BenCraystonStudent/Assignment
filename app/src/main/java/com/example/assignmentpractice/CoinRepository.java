@@ -72,4 +72,24 @@ public class CoinRepository {
         }
 
     }
+
+    public void RemoveCoin(String coin_name){
+        templateCoin = new Coin();
+        templateCoin.mCoin = coin_name;
+        new removeAsyncTask(mCoinDao).execute(templateCoin);
+    }
+
+    private static class removeAsyncTask extends AsyncTask<Coin, Void, Void>
+    {
+        public CoinDAO rAsyncTaskDao;
+
+        public removeAsyncTask(CoinDAO dao){rAsyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(final Coin... params)
+        {
+            rAsyncTaskDao.deleteCoin(params[0]);
+            return null;
+        }
+    }
 }

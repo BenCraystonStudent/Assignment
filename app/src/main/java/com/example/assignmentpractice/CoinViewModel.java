@@ -21,6 +21,8 @@ public class CoinViewModel extends AndroidViewModel {
 
     public void insert(Coin coin) { mRepository.insert(coin); }
 
+    public void removeCoin(String coin_name){ mRepository.RemoveCoin(coin_name);}
+
     public void UpdateCurrencyHeld(String coin_name, Double c_held) { mRepository.UpdateCurrencyHeld(c_held, coin_name); }
 
 }

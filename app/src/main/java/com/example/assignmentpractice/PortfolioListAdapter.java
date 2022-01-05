@@ -1,6 +1,7 @@
 package com.example.assignmentpractice;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,7 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
     public PortfolioListAdapter(Context context, List<Coin> mCoins)
     {
         mInflater = LayoutInflater.from(context);
-        context = this.context;
+        this.context = context;
     }
 
     public Coin getCoin(int position) {
@@ -91,17 +92,12 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         public void onClick(View v) {
             int position = getAdapterPosition();
             Coin coin = adapter.getCoin(position);
-            String coin_name = coin.mCoin;
 
-            cvm = new ViewModelProvider().get(CoinViewModel.class);
-            RemoveCoin rc = new RemoveCoin();
-            rc.RemoveCurrency(context, coin_name, coin_name1 ->{
-                cvm.UpdateCurrencyHeld(coin, amount);
-                notify();
-            } );
+            Intent i = new Intent(context, RemoveCoinActivity.class);
+            i.putExtra("coinName_info", coin.mCoin);
+            context.startActivity(i);
 
             }
         }
-        }
-    }
 }
+
