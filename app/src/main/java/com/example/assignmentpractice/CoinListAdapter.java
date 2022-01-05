@@ -56,7 +56,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             holder.CoinItemView.setText(current.mCoin);
             holder.CoinCurrency.setText(current.mCurrency);
             holder.CoinValue.setText(current.mValue.toString());
-            holder.AmountHeld.setText(current.mCurrencyHeld.toString());
             holder.FavImage.setImageResource(R.drawable.ic_favourite);
             holder.InfoImage.setImageResource(R.drawable.ic_info);
 
@@ -90,7 +89,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
         private final TextView CoinValue;
         private final ImageButton FavImage;
         private final ImageButton InfoImage;
-        private final TextView AmountHeld;
 
         private CoinViewHolder(View itemView) {
             super(itemView);
@@ -100,7 +98,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
             CoinValue = itemView.findViewById(R.id.CoinValue);
             FavImage = itemView.findViewById(R.id.FavImage);
             InfoImage = itemView.findViewById((R.id.InfoImage));
-            AmountHeld = itemView.findViewById(R.id.AmountHeld);
 
             FavImage.setOnClickListener(this);
             InfoImage.setOnClickListener(this);

@@ -53,6 +53,15 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageButton
+        android:id="@+id/unfavImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_unfav"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@id/InfoImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/InfoImage"
