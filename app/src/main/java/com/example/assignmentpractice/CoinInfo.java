@@ -52,7 +52,7 @@ import java.util.Objects;
 import java.util.Calendar;
 
 public class CoinInfo extends AppCompatActivity {
-    private Button buyButton, setButton;
+    private Button addButton;
     private TextView currencyHeader, currencyDescription, currencyName;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
@@ -86,7 +86,7 @@ public class CoinInfo extends AppCompatActivity {
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
-        buyButton = findViewById(R.id.buyBtn);
+        addButton = findViewById(R.id.addBtn);
 
 
           //  buyButton.setOnClickListener(new View.OnClickListener() {

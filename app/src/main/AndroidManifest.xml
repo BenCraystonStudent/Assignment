@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
         <activity
+            android:name=".CoinInfoPortfolio"
+            android:exported="true" />
+        <activity
             android:name=".UserProfile"
             android:exported="true" />
         <activity

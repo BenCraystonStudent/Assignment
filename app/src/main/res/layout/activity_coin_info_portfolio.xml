@@ -62,7 +62,7 @@
     </ScrollView>
 
     <Button
-        android:id ="@+id/addBtn"
+        android:id ="@+id/buyBtn"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -72,6 +72,14 @@
 
     </Button>
 
+    <Button
+        android:id ="@+id/setBtn"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp"
+        android:text="Set">
+
+    </Button>
 
 
 </LinearLayout>
