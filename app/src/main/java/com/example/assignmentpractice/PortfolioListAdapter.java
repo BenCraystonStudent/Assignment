@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,6 +59,7 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         mCoins = Coins;
         notifyDataSetChanged();
     }
+
 
     // getItemCount() is called many times, and when it is first called,
     // mCoins has not been updated (means initially, it's null, and we can't return null).
