@@ -1,6 +1,7 @@
 package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -47,6 +48,7 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -54,7 +56,7 @@ import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
     private Button buyButton;
-    private TextView currencyHeader, currencyDescription, profits;
+    private TextView currencyHeader, currencyDescription, profit;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -112,7 +114,14 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        profits = findViewById(R.id.investmentsTextView);
+        profit = findViewById(R.id.profit);
+
+        cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                profit.setText(String.valueOf(aDouble));
+            }
+        });
     }
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
