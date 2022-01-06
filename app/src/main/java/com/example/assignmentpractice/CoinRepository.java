@@ -11,13 +11,16 @@ public class CoinRepository {
     private CoinDAO mCoinDao;
     private LiveData<List<Coin>> mAllCoins;
     private Coin templateCoin;
+    private LiveData<Double> mTotalInvested;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
         mCoinDao = db.coinDao();
         mAllCoins = mCoinDao.getAllCoins();
-
+        mTotalInvested = mCoinDao.totalInvestments();
     }
+
+    public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
     public LiveData<List<Coin>> getAllCoins() {
         return mAllCoins;

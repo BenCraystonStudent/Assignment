@@ -10,11 +10,13 @@ import java.util.List;
 public class CoinViewModel extends AndroidViewModel {
     private CoinRepository mRepository;
     private LiveData<List<Coin>> mAllCoins;
+    private LiveData<Double> mTotalInvested;
 
     public CoinViewModel (Application application) {
         super(application);
         mRepository = new CoinRepository(application);
         mAllCoins = mRepository.getAllCoins();
+        mTotalInvested = mRepository.returnTotalInvestments();
     }
 
     public LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
@@ -25,4 +27,5 @@ public class CoinViewModel extends AndroidViewModel {
 
     public void UpdateCurrencyHeld(String coin_name, Double c_held) { mRepository.UpdateCurrencyHeld(c_held, coin_name); }
 
+    public LiveData<Double> returnTotalInvestments() {return mTotalInvested;}
 }

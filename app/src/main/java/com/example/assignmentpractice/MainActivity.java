@@ -25,7 +25,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -59,12 +61,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public static final int ADD_COIN_REQUEST = 1;
     public SearchView searchView;
     public SearchManager searchManager;
+    private ImageButton userProfile;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_tabs);
+
+
         searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         searchView = findViewById(R.id.search_view);
         searchView.setQueryHint("Search Currencies....");
@@ -81,6 +86,15 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
+            }
+        });
+
+        userProfile = findViewById(R.id.userProfileBtn);
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), UserProfile.class);
+                startActivity(i);
             }
         });
 

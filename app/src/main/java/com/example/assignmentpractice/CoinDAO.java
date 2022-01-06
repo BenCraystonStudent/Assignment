@@ -26,6 +26,9 @@ public interface CoinDAO {
     @Delete
     void deleteCoin(Coin coin);
 
+    @Query("SELECT SUM(currency_held) FROM coin_table")
+    LiveData<Double> totalInvestments();
+
    // @Update
    // void update(Coin coin);
 
