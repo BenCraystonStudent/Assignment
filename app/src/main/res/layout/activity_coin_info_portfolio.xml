@@ -47,7 +47,7 @@
     <ScrollView
         android:id="@+id/currencyDescriptionScrollable"
         android:layout_width="match_parent"
-        android:layout_height="375dp"
+        android:layout_height="346dp"
         android:layout_weight="1"
         android:scrollbars="vertical"
         android:text=""
@@ -60,6 +60,13 @@
             android:text="" />
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/profit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HELLLO">
+    </TextView>
 
     <Button
         android:id ="@+id/buyBtn"

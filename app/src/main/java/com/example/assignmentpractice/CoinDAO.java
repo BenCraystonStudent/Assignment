@@ -30,5 +30,6 @@ public interface CoinDAO {
     @Query("SELECT SUM(currency_held) FROM coin_table")
     LiveData<Double> totalInvestments();
 
-
+    @Query("SELECT value FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> valueAtTimeOfPurchase();
 }

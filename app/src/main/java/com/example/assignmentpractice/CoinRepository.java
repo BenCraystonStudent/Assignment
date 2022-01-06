@@ -12,13 +12,17 @@ public class CoinRepository {
     private LiveData<List<Coin>> mAllCoins;
     private Coin templateCoin;
     private LiveData<Double> mTotalInvested;
+    private LiveData<Double> mValueAtTOP;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
         mCoinDao = db.coinDao();
         mAllCoins = mCoinDao.getAllCoins();
         mTotalInvested = mCoinDao.totalInvestments();
+        mValueAtTOP = mCoinDao.valueAtTimeOfPurchase();
     }
+
+    public LiveData<Double> returnValueAtTOP() {return mValueAtTOP;}
 
     public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
