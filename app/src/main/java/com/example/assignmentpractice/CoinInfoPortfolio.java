@@ -70,8 +70,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private BuyCurrency bc;
     private CoinDAO dao;
     private double gbpPrice;
-    private Double gbpPriceDbl;
-    private String id;
+    private Double gbpPriceDbl, aDouble;
 
 
     //  public CoinInfo(Context context){
