@@ -11,13 +11,16 @@ public class CoinRepository {
     private CoinDAO mCoinDao;
     private LiveData<List<Coin>> mAllCoins;
     private Coin templateCoin;
+    private LiveData<Double> mTotalInvested;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
         mCoinDao = db.coinDao();
         mAllCoins = mCoinDao.getAllCoins();
+        mTotalInvested = mCoinDao.totalInvestments();
     }
 
+    public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
     public LiveData<List<Coin>> getAllCoins() {
         return mAllCoins;
@@ -93,5 +96,24 @@ public class CoinRepository {
         }
     }
 
+    public void ExecuteValue(String coin_name) {
+        templateCoin = new Coin();
+        templateCoin.mCoin = coin_name;
+        new getValueAsyncTask(mCoinDao).execute(templateCoin);
+    }
+
+    private static class getValueAsyncTask extends AsyncTask<Coin, Void, Void>
+    {
+        public CoinDAO gAsyncTaskDao;
+
+        public getValueAsyncTask(CoinDAO dao){gAsyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(final Coin... params)
+        {
+            gAsyncTaskDao.valueAtTimeOfPurchase(params[0].mCoin);
+            return null;
+        }
+    }
 
 }
