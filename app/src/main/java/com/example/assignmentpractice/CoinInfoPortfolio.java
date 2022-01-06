@@ -86,7 +86,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info_portfolio);
 
-
+//
         Bundle extras = getIntent().getExtras();
         receivedCoinNameInfo = extras.getString("coinName_port_info");
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
