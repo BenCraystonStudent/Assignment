@@ -31,5 +31,6 @@ public interface CoinDAO {
     LiveData<Double> totalInvestments();
 
     @Query("SELECT value FROM coin_table WHERE coin_name = :coin_name")
-    LiveData<Double> valueAtTimeOfPurchase();
+    LiveData<Double> valueAtTimeOfPurchase(String coin_name);
+
 }

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -53,7 +54,7 @@ import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
     private Button buyButton;
-    private TextView currencyHeader, currencyDescription, currencyName;
+    private TextView currencyHeader, currencyDescription, profits;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -89,7 +90,6 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
         buyButton = findViewById(R.id.buyBtn);
 
-
             buyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,6 +112,13 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        profits = findViewById(R.id.investmentsTextView);
+        cvm.returnTotalAtTOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                profits.setText(gbpPrice);
+            }
+        });
     }
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {

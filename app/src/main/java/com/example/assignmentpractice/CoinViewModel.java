@@ -12,13 +12,14 @@ public class CoinViewModel extends AndroidViewModel {
     private LiveData<List<Coin>> mAllCoins;
     private LiveData<Double> mTotalInvested;
     private LiveData<Double> mTotalAtTOP;
+    private String coin_name;
 
     public CoinViewModel (Application application) {
         super(application);
         mRepository = new CoinRepository(application);
         mAllCoins = mRepository.getAllCoins();
         mTotalInvested = mRepository.returnTotalInvestments();
-        mTotalAtTOP = mRepository.returnValueAtTOP();
+        mTotalAtTOP = mRepository.returnValueAtTOP(coin_name);
     }
 
     public LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
@@ -31,5 +32,5 @@ public class CoinViewModel extends AndroidViewModel {
 
     public LiveData<Double> returnTotalInvestments() {return mTotalInvested;}
 
-    public LiveData<Double> returnTotalAtTOP() {return mTotalAtTOP;}
+    public LiveData<Double> ExecuteValue(String coin_name) {return mTotalAtTOP;}
 }
