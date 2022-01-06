@@ -95,7 +95,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     BuyCurrency bc = new BuyCurrency();
                     bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
                         cvm.UpdateCurrencyHeld(coin, amount);
-                        notify();
+                        finish();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
                 }
