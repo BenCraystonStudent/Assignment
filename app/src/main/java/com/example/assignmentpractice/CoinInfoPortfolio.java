@@ -24,6 +24,9 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -71,6 +74,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private CoinDAO dao;
     public double gbpPrice, gotValue;
     private Double gbpPriceDbl, aDouble, theDifference;
+    private Handler mHandler;
 
 
     //  public CoinInfo(Context context){
@@ -97,7 +101,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                 public void onClick(View v) {
                     BuyCurrency bc = new BuyCurrency();
                     bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
-                        cvm.UpdateCurrencyHeld(coin, amount * gbpPriceDbl);
+                        cvm.UpdateCurrencyHeld(coin, gbpPrice * amount);
                         finish();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
@@ -117,6 +121,14 @@ public class CoinInfoPortfolio extends AppCompatActivity {
             @Override
             public void onChanged(Double aDouble) {
                 profit.setText("Was: £" + String.valueOf(aDouble) + " on purchase");
+                mHandler = new Handler(Looper.getMainLooper())
+                {
+                    @Override
+                    public void handleMessage(Message passedPrice){
+                        gotValue = aDouble;
+                        difference.setText("The difference is " + String.valueOf(gotValue - gbpPrice));
+                    }
+                };
             }
         });
         try {
@@ -184,6 +196,8 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     coinImage.setImageDrawable(largeImg);
                     currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
                     now.setText("Now: £" + String.valueOf(gbpPrice));
+                    Message message = mHandler.obtainMessage();
+                    mHandler.handleMessage(message);
                 });
             }
 
