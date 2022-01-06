@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -18,14 +17,37 @@
             android:id="@+id/tabs_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="CrpytoArcade"
+            app:titleTextColor="@color/white">
+
+
+            <SearchView
+                android:id="@+id/search_view"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/circular_background"
+                android:queryBackground="@android:color/white" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/circular_background"
+                android:src="@drawable/ic_profile" />
+
+
+        </androidx.appcompat.widget.Toolbar>
+
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/all_currencies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-             />
+            android:background="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

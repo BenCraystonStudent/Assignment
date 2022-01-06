@@ -80,7 +80,7 @@ public class AllCurrencies extends Fragment {
     {
         aContext = container.getContext();
         aView = inflater.inflate(R.layout.fragment_all_currencies, container, false);
-        aRecyclerView = aView.findViewById(R.id.recyclerview);
+        aRecyclerView = aView.findViewById(R.id.all_recyclerview);
         try {
             getHTTPData();
         } catch (IOException e) {

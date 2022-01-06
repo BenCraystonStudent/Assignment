@@ -1,11 +1,15 @@
 package com.example.assignmentpractice;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -14,18 +18,24 @@ import java.util.List;
 public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
+    private CoinViewModel cvm;
     private List<Coin> mCoins = new ArrayList<>(); //new list for Favourites
+    PortfolioListAdapter adapter = this;
+    Context context;
 
     public PortfolioListAdapter(Context context, List<Coin> mCoins)
     {
         mInflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
-
+    public Coin getCoin(int position) {
+        return mCoins.get(position);
+    }
 
     @Override
     public CoinViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = mInflater.inflate(R.layout.coinlist_item, parent, false);
+        View itemView = mInflater.inflate(R.layout.coin_list_items_port, parent, false);
         return new CoinViewHolder(itemView);
     }
 
@@ -34,6 +44,10 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         if (mCoins != null) {
             Coin current = mCoins.get(position);
             holder.CoinItemView.setText(current.mCoin);
+            holder.AmountHeld.setText(current.mCurrencyHeld.toString());
+            holder.CoinCurrency.setText(current.mCurrency);
+            holder.CoinValue.setText(current.mValue.toString());
+            holder.UnfavImage.setImageResource(R.drawable.ic_unfav);
         } else {
             // Covers the case of data not being ready yet.
             holder.CoinItemView.setText("No Coin");
@@ -54,12 +68,36 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         else return 0;
     }
 
-    class CoinViewHolder extends RecyclerView.ViewHolder {
+    class CoinViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView CoinItemView;
+        private final TextView AmountHeld;
+        private final TextView CoinCurrency;
+        private final TextView CoinValue;
+        private final ImageButton UnfavImage;
+
 
         private CoinViewHolder(View itemView) {
             super(itemView);
             CoinItemView = itemView.findViewById(R.id.Coin);
+            AmountHeld = itemView.findViewById(R.id.AmountHeld);
+            CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
+            CoinValue = itemView.findViewById(R.id.CoinValue);
+            UnfavImage = itemView.findViewById(R.id.unfavImage);
+
+            UnfavImage.setOnClickListener(this);
+          //  InfoImage.setOnClickListener(this);
         }
-    }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Coin coin = adapter.getCoin(position);
+
+            Intent i = new Intent(context, RemoveCoinActivity.class);
+            i.putExtra("coinName_info", coin.mCoin);
+            context.startActivity(i);
+
+            }
+        }
 }
+

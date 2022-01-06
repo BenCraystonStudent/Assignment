@@ -51,7 +51,7 @@ import java.util.Objects;
 
 import java.util.Calendar;
 
-public class CoinInfo extends AppCompatActivity {
+public class CoinInfoPortfolio extends AppCompatActivity {
     private Button addButton;
     private TextView currencyHeader, currencyDescription, currencyName;
     private ScrollView currencyDescriptionScrollable;
@@ -69,9 +69,9 @@ public class CoinInfo extends AppCompatActivity {
     private String gbpPrice;
 
 
-  //  public CoinInfo(Context context){
-  //      this.context = context;
-  //  }
+    //  public CoinInfo(Context context){
+    //      this.context = context;
+    //  }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +103,9 @@ public class CoinInfo extends AppCompatActivity {
 
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
-       // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
-       // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
-       // toast.show();
+        // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
+        // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
+        // toast.show();
         try {
             getHTTPData();
         } catch (IOException e) {
@@ -113,12 +113,12 @@ public class CoinInfo extends AppCompatActivity {
         }
     }
 
-   // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
-   //     @Override
-   //     public void onReceive(Context context, Intent intent_info) {
-   //         receivedCoinNameInfo = intent_info.getStringExtra("coinName_info");
-   //     }
-  //  };
+    // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
+    //     @Override
+    //     public void onReceive(Context context, Intent intent_info) {
+    //         receivedCoinNameInfo = intent_info.getStringExtra("coinName_info");
+    //     }
+    //  };
 
 
     void getHTTPData() throws IOException {
@@ -128,7 +128,7 @@ public class CoinInfo extends AppCompatActivity {
                 Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/coins/"+receivedCoinNameInfo+"?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"))
                         .newBuilder();
 
-       // urlBuilder.addQueryParameter("ids", receivedCoinName);
+        // urlBuilder.addQueryParameter("ids", receivedCoinName);
 
         String url = urlBuilder.build().toString();
         Request request = new Request.Builder()
@@ -165,7 +165,7 @@ public class CoinInfo extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Log.d("OkHTTPResponse", myResponse);
                     currencyDescription.setText(desc);
-                   // currencyDescriptionScrollable.addView(currencyDescription);
+                    // currencyDescriptionScrollable.addView(currencyDescription);
                     coinImage.setImageDrawable(largeImg);
                     currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
                 });
@@ -186,11 +186,11 @@ public class CoinInfo extends AppCompatActivity {
         Intent intent = new Intent("addCoin");
         intent.putExtra("coinName", receivedCoinNameInfo);
         intent.putExtra("coinCurrency", "gbp");
-       // String stringedDouble = coin.mValue.toString();
+        // String stringedDouble = coin.mValue.toString();
         intent.putExtra("coinValue", gbpPrice);
 
         LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-        Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo + " added to Portfolio", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(CoinInfoPortfolio.this, receivedCoinNameInfo + " added to Portfolio", Toast.LENGTH_SHORT);
         toast.show();
 
         finish();
