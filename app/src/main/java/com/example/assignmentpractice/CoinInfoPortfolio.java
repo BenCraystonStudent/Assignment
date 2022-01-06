@@ -1,9 +1,11 @@
 package com.example.assignmentpractice;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -46,14 +48,15 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
-    private Button addButton;
-    private TextView currencyHeader, currencyDescription, currencyName;
+    private Button buyButton;
+    private TextView currencyHeader, currencyDescription, profit;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -67,6 +70,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private BuyCurrency bc;
     private CoinDAO dao;
     private String gbpPrice;
+    private Double gbpPriceDbl;
 
 
     //  public CoinInfo(Context context){
@@ -76,30 +80,29 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coin_info);
+        setContentView(R.layout.activity_coin_info_portfolio);
 
 
         Bundle extras = getIntent().getExtras();
-        receivedCoinNameInfo = extras.getString("coinName_info");
+        receivedCoinNameInfo = extras.getString("coinName_port_info");
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
         coininfotoolbar = findViewById(R.id.coin_info_toolbar);
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
-        addButton = findViewById(R.id.addBtn);
+        buyButton = findViewById(R.id.buyBtn);
 
-
-         /*   buyButton.setOnClickListener(new View.OnClickListener() {
+            buyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     BuyCurrency bc = new BuyCurrency();
-                    bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
-                        cvm.UpdateCurrencyHeld(coin, amount);
-                        notify();
+                    bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
+                        cvm.UpdateCurrencyHeld(coin, amount * gbpPriceDbl);
+                        finish();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
                 }
-            }); */
+            });
 
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);
@@ -111,6 +114,14 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        profit = findViewById(R.id.profit);
+
+        cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                profit.setText(String.valueOf(aDouble));
+            }
+        });
     }
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
@@ -152,6 +163,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     JSONObject priceData = (JSONObject) JSONData.get("market_data");
                     JSONObject JSONPrices = priceData.getJSONObject("current_price");
                     gbpPrice = JSONPrices.getString("gbp");
+                    gbpPriceDbl = Double.parseDouble(gbpPrice);
                     img = imagedata.getString("large");
                     URL ImgURL = new URL(imagedata.getString("large"));
                     largeImg = Drawable.createFromStream(ImgURL.openStream(), img);

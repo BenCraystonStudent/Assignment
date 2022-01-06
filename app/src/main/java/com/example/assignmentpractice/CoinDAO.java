@@ -11,6 +11,7 @@ import java.util.List;
 
 @Dao
 public interface CoinDAO {
+
     @Insert
     void insert (Coin coin);
 
@@ -26,7 +27,10 @@ public interface CoinDAO {
     @Delete
     void deleteCoin(Coin coin);
 
-   // @Update
-   // void update(Coin coin);
+    @Query("SELECT SUM(currency_held) FROM coin_table")
+    LiveData<Double> totalInvestments();
+
+    @Query("SELECT value FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> valueAtTimeOfPurchase(String coin_name);
 
 }

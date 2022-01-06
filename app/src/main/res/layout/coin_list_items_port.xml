@@ -50,13 +50,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_unfav"
-        app:layout_constraintEnd_toStartOf="@id/InfoImage"
+        app:layout_constraintEnd_toStartOf="@id/infoImagePort"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/InfoImage"
+        android:id="@+id/infoImagePort"
         android:src="@drawable/ic_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

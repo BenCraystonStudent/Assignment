@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,6 +60,7 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         notifyDataSetChanged();
     }
 
+
     // getItemCount() is called many times, and when it is first called,
     // mCoins has not been updated (means initially, it's null, and we can't return null).
     @Override
@@ -74,6 +76,7 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
         private final TextView CoinCurrency;
         private final TextView CoinValue;
         private final ImageButton UnfavImage;
+        private final ImageButton InfoImage;
 
 
         private CoinViewHolder(View itemView) {
@@ -83,21 +86,34 @@ public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdap
             CoinCurrency = itemView.findViewById(R.id.CoinCurrency);
             CoinValue = itemView.findViewById(R.id.CoinValue);
             UnfavImage = itemView.findViewById(R.id.unfavImage);
+            InfoImage = itemView.findViewById(R.id.infoImagePort);
 
             UnfavImage.setOnClickListener(this);
-          //  InfoImage.setOnClickListener(this);
+            InfoImage.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
-            Coin coin = adapter.getCoin(position);
+            switch (v.getId()) {
+                case R.id.unfavImage:
+                int position = getAdapterPosition();
+                Coin coin = adapter.getCoin(position);
 
-            Intent i = new Intent(context, RemoveCoinActivity.class);
-            i.putExtra("coinName_info", coin.mCoin);
-            context.startActivity(i);
+                Intent removeCoinIntent = new Intent(context, RemoveCoinActivity.class);
+                removeCoinIntent.putExtra("coinName_info_remove", coin.mCoin);
+                context.startActivity(removeCoinIntent);
+                break;
 
+                case R.id.infoImagePort:
+                    int position_port_info = getAdapterPosition();
+                    Coin coin_port_info = adapter.getCoin(position_port_info);
+                    Intent startCoinInfoPort = new Intent(context, CoinInfoPortfolio.class);
+                    startCoinInfoPort.putExtra("coinName_port_info", coin_port_info.mCoin);
+                    context.startActivity(startCoinInfoPort);
+                    break;
             }
         }
+
+    }
 }
 

@@ -12,6 +12,7 @@ import java.util.Locale;
 
 @Entity(tableName = "coin_table")
 public class Coin {
+    //TODO: Add Unique Primary Key which will allow users to add and remove a coin as many times at will, otherwise the program will throw UNIQUE_CONSTRAINT_FAILED error on remove and insert same coin
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "coin_name")

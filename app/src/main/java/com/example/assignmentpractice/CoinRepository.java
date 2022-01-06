@@ -11,13 +11,22 @@ public class CoinRepository {
     private CoinDAO mCoinDao;
     private LiveData<List<Coin>> mAllCoins;
     private Coin templateCoin;
+    private LiveData<Double> mTotalInvested;
+    private LiveData<Double> mVATOP;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
         mCoinDao = db.coinDao();
         mAllCoins = mCoinDao.getAllCoins();
-
+        mTotalInvested = mCoinDao.totalInvestments();
     }
+
+    public LiveData<Double> getVATOP(String coin_name){
+        return mCoinDao.valueAtTimeOfPurchase(coin_name);
+    }
+
+
+    public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
     public LiveData<List<Coin>> getAllCoins() {
         return mAllCoins;
@@ -27,10 +36,6 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
-   // public void update(Coin coin) {
-   //     mCoinDao.update(coin);
-    //    new updateAsyncTask(mCoinDao).execute(coin);
-  //  }
 
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
 
@@ -92,4 +97,6 @@ public class CoinRepository {
             return null;
         }
     }
+
+
 }

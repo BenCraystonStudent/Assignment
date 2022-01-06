@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +45,7 @@ import okhttp3.Response;
 public class AllCurrencies extends Fragment {
     private final LinkedList<Coin> mCoinList = new LinkedList<>();
     private final LinkedList<Coin> coins = new LinkedList<>();
+    private LiveData<List<Coin>> dbCoins;
     private RecyclerView aRecyclerView;
     private Activity activity;
     private CoinListAdapter aAdapter;
