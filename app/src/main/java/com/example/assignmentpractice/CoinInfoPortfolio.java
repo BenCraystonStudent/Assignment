@@ -67,6 +67,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private BuyCurrency bc;
     private CoinDAO dao;
     private String gbpPrice;
+    private Double gbpPriceDbl;
 
 
     //  public CoinInfo(Context context){
@@ -94,7 +95,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                 public void onClick(View v) {
                     BuyCurrency bc = new BuyCurrency();
                     bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
-                        cvm.UpdateCurrencyHeld(coin, amount);
+                        cvm.UpdateCurrencyHeld(coin, amount * gbpPriceDbl);
                         finish();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
@@ -152,6 +153,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     JSONObject priceData = (JSONObject) JSONData.get("market_data");
                     JSONObject JSONPrices = priceData.getJSONObject("current_price");
                     gbpPrice = JSONPrices.getString("gbp");
+                    gbpPriceDbl = Double.parseDouble(gbpPrice);
                     img = imagedata.getString("large");
                     URL ImgURL = new URL(imagedata.getString("large"));
                     largeImg = Drawable.createFromStream(ImgURL.openStream(), img);

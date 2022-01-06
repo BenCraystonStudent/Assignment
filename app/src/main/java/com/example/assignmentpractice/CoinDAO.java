@@ -11,6 +11,7 @@ import java.util.List;
 
 @Dao
 public interface CoinDAO {
+
     @Insert
     void insert (Coin coin);
 
