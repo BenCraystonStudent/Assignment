@@ -12,6 +12,7 @@ public class CoinRepository {
     private LiveData<List<Coin>> mAllCoins;
     private Coin templateCoin;
     private LiveData<Double> mTotalInvested;
+    private LiveData<Double> mVATOP;
 
     CoinRepository(Application application) {
         CoinRoomDatabase db = CoinRoomDatabase.getDatabase(application);
@@ -19,6 +20,11 @@ public class CoinRepository {
         mAllCoins = mCoinDao.getAllCoins();
         mTotalInvested = mCoinDao.totalInvestments();
     }
+
+    public LiveData<Double> getVATOP(String coin_name){
+        return mCoinDao.valueAtTimeOfPurchase(coin_name);
+    }
+
 
     public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
@@ -30,10 +36,6 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
-   // public void update(Coin coin) {
-   //     mCoinDao.update(coin);
-    //    new updateAsyncTask(mCoinDao).execute(coin);
-  //  }
 
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
 
@@ -96,24 +98,5 @@ public class CoinRepository {
         }
     }
 
-    public void ExecuteValue(String coin_name) {
-        templateCoin = new Coin();
-        templateCoin.mCoin = coin_name;
-        new getValueAsyncTask(mCoinDao).execute(templateCoin);
-    }
-
-    private static class getValueAsyncTask extends AsyncTask<Coin, Void, Void>
-    {
-        public CoinDAO gAsyncTaskDao;
-
-        public getValueAsyncTask(CoinDAO dao){gAsyncTaskDao = dao;}
-
-        @Override
-        protected Void doInBackground(final Coin... params)
-        {
-            gAsyncTaskDao.valueAtTimeOfPurchase(params[0].mCoin);
-            return null;
-        }
-    }
 
 }
