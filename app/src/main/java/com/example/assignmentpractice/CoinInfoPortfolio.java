@@ -113,12 +113,6 @@ public class CoinInfoPortfolio extends AppCompatActivity {
             e.printStackTrace();
         }
         profits = findViewById(R.id.investmentsTextView);
-        cvm.returnTotalAtTOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
-            @Override
-            public void onChanged(Double aDouble) {
-                profits.setText(gbpPrice);
-            }
-        });
     }
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {

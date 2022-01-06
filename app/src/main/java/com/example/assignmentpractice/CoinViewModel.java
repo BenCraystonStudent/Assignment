@@ -18,8 +18,6 @@ public class CoinViewModel extends AndroidViewModel {
         super(application);
         mRepository = new CoinRepository(application);
         mAllCoins = mRepository.getAllCoins();
-        mTotalInvested = mRepository.returnTotalInvestments();
-        mTotalAtTOP = mRepository.returnValueAtTOP(coin_name);
     }
 
     public LiveData<List<Coin>> getAllCoins() { return mAllCoins; }
@@ -30,7 +28,4 @@ public class CoinViewModel extends AndroidViewModel {
 
     public void UpdateCurrencyHeld(String coin_name, Double c_held) { mRepository.UpdateCurrencyHeld(c_held, coin_name); }
 
-    public LiveData<Double> returnTotalInvestments() {return mTotalInvested;}
-
-    public LiveData<Double> ExecuteValue(String coin_name) {return mTotalAtTOP;}
 }
