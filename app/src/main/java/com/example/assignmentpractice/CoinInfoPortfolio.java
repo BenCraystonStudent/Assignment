@@ -56,7 +56,7 @@ import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
     private Button buyButton;
-    private TextView currencyHeader, currencyDescription, profit;
+    private TextView currencyHeader, currencyDescription, profit, now;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -69,8 +69,9 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private CoinViewModel cvm;
     private BuyCurrency bc;
     private CoinDAO dao;
-    private String gbpPrice;
+    private double gbpPrice;
     private Double gbpPriceDbl;
+    private String id;
 
 
     //  public CoinInfo(Context context){
@@ -115,14 +116,16 @@ public class CoinInfoPortfolio extends AppCompatActivity {
             e.printStackTrace();
         }
         profit = findViewById(R.id.profit);
+        now = findViewById(R.id.nowPrice);
 
         cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
             @Override
             public void onChanged(Double aDouble) {
-                profit.setText(String.valueOf(aDouble));
+                profit.setText("Was: £" + String.valueOf(aDouble) + " on purchase");
             }
         });
     }
+
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
     //     @Override
@@ -161,9 +164,9 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     JSONObject data = (JSONObject) JSONData.get("description");
                     JSONObject imagedata = (JSONObject) JSONData.get("image");
                     JSONObject priceData = (JSONObject) JSONData.get("market_data");
-                    JSONObject JSONPrices = priceData.getJSONObject("current_price");
-                    gbpPrice = JSONPrices.getString("gbp");
-                    gbpPriceDbl = Double.parseDouble(gbpPrice);
+                    JSONObject JSONPrices = (JSONObject) priceData.get("current_price");
+                    gbpPrice = JSONPrices.getDouble("gbp");
+                   // gbpPriceDbl = Double.parseDouble(gbpPrice);
                     img = imagedata.getString("large");
                     URL ImgURL = new URL(imagedata.getString("large"));
                     largeImg = Drawable.createFromStream(ImgURL.openStream(), img);
@@ -180,6 +183,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     // currencyDescriptionScrollable.addView(currencyDescription);
                     coinImage.setImageDrawable(largeImg);
                     currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
+                    now.setText("Now: £" + String.valueOf(gbpPrice));
                 });
             }
 
