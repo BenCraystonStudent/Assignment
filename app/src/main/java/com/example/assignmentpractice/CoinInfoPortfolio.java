@@ -52,7 +52,7 @@ import java.util.Objects;
 import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
-    private Button addButton;
+    private Button buyButton;
     private TextView currencyHeader, currencyDescription, currencyName;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
@@ -76,30 +76,30 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coin_info);
+        setContentView(R.layout.activity_coin_info_portfolio);
 
 
         Bundle extras = getIntent().getExtras();
-        receivedCoinNameInfo = extras.getString("coinName_info");
+        receivedCoinNameInfo = extras.getString("coinName_port_info");
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
         coininfotoolbar = findViewById(R.id.coin_info_toolbar);
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
-        addButton = findViewById(R.id.addBtn);
+        buyButton = findViewById(R.id.buyBtn);
 
 
-         /*   buyButton.setOnClickListener(new View.OnClickListener() {
+            buyButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     BuyCurrency bc = new BuyCurrency();
-                    bc.DisplayBuyCurrency(CoinInfo.this, receivedCoinNameInfo, (coin, amount) -> {
+                    bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
                         cvm.UpdateCurrencyHeld(coin, amount);
                         notify();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
                 }
-            }); */
+            });
 
         coinImage = (ImageView)findViewById(R.id.coinImagexml);
         setSupportActionBar(coininfotoolbar);

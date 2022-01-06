@@ -14,7 +14,7 @@ public class RemoveCoinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        receivedCoinNameInfo = extras.getString("coinName_info");
+        receivedCoinNameInfo = extras.getString("coinName_info_remove");
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
         RemoveCoin rc = new RemoveCoin();
         rc.RemoveCurrency(this, receivedCoinNameInfo, coin_name1 -> {

@@ -127,9 +127,9 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
                     int position_info = getAdapterPosition();
                     Coin coin_info = adapter.getCoin(position_info);
 
-                    Intent i = new Intent(context, CoinInfo.class);
-                    i.putExtra("coinName_info", coin_info.mCoin);
-                    context.startActivity(i);
+                    Intent startCoinInfo = new Intent(context, CoinInfo.class);
+                    startCoinInfo.putExtra("coinName_info", coin_info.mCoin);
+                    context.startActivity(startCoinInfo);
 
                   //  Intent intent_info = new Intent("getCoinInfo");
                   //  intent_info.putExtra("coinName_info", coin_info.mCoin);
