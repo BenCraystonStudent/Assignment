@@ -56,7 +56,7 @@ import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
     private Button buyButton;
-    private TextView currencyHeader, currencyDescription, profit, now;
+    private TextView currencyHeader, currencyDescription, profit, now, difference;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -69,8 +69,8 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private CoinViewModel cvm;
     private BuyCurrency bc;
     private CoinDAO dao;
-    private double gbpPrice;
-    private Double gbpPriceDbl, aDouble;
+    public double gbpPrice, gotValue;
+    private Double gbpPriceDbl, aDouble, theDifference;
 
 
     //  public CoinInfo(Context context){
@@ -109,20 +109,21 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
         // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
         // toast.show();
-        try {
-            getHTTPData();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         profit = findViewById(R.id.profit);
         now = findViewById(R.id.nowPrice);
-
+        difference = findViewById(R.id.difference);
         cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
             @Override
             public void onChanged(Double aDouble) {
                 profit.setText("Was: £" + String.valueOf(aDouble) + " on purchase");
             }
         });
+        try {
+            getHTTPData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
