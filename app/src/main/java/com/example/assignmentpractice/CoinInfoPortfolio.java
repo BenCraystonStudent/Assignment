@@ -24,6 +24,9 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -56,7 +59,7 @@ import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
     private Button buyButton;
-    private TextView currencyHeader, currencyDescription, profit;
+    private TextView currencyHeader, currencyDescription, profit, now, difference;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
     private String receivedCoinNameInfo;
@@ -69,8 +72,9 @@ public class CoinInfoPortfolio extends AppCompatActivity {
     private CoinViewModel cvm;
     private BuyCurrency bc;
     private CoinDAO dao;
-    private String gbpPrice;
-    private Double gbpPriceDbl;
+    public double gbpPrice, gotValue;
+    private Double gbpPriceDbl, aDouble, theDifference;
+    private Handler mHandler;
 
 
     //  public CoinInfo(Context context){
@@ -82,7 +86,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_info_portfolio);
 
-
+//
         Bundle extras = getIntent().getExtras();
         receivedCoinNameInfo = extras.getString("coinName_port_info");
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
@@ -97,7 +101,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                 public void onClick(View v) {
                     BuyCurrency bc = new BuyCurrency();
                     bc.DisplayBuyCurrency(CoinInfoPortfolio.this, receivedCoinNameInfo, (coin, amount) -> {
-                        cvm.UpdateCurrencyHeld(coin, amount * gbpPriceDbl);
+                        cvm.UpdateCurrencyHeld(coin, gbpPrice * amount);
                         finish();
                         Log.d("Show Coins", cvm.getAllCoins().toString());
                     });
@@ -109,20 +113,31 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         // LocalBroadcastManager.getInstance(this).registerReceiver(InfoReceiver, new IntentFilter("getCoinInfo"));
         // Toast toast = Toast.makeText(CoinInfo.this, receivedCoinNameInfo, Toast.LENGTH_SHORT);
         // toast.show();
+
+        profit = findViewById(R.id.profit);
+        now = findViewById(R.id.nowPrice);
+        difference = findViewById(R.id.difference);
+        cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                profit.setText("Was: £" + String.valueOf(aDouble) + " on purchase");
+                mHandler = new Handler(Looper.getMainLooper())
+                {
+                    @Override
+                    public void handleMessage(Message passedPrice){
+                        gotValue = aDouble;
+                        difference.setText("The difference is " + String.valueOf(gotValue - gbpPrice));
+                    }
+                };
+            }
+        });
         try {
             getHTTPData();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        profit = findViewById(R.id.profit);
-
-        cvm.getVATOP(receivedCoinNameInfo).observe(this, new Observer<Double>() {
-            @Override
-            public void onChanged(Double aDouble) {
-                profit.setText(String.valueOf(aDouble));
-            }
-        });
     }
+
 
     // public BroadcastReceiver InfoReceiver = new BroadcastReceiver() {
     //     @Override
@@ -161,9 +176,9 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     JSONObject data = (JSONObject) JSONData.get("description");
                     JSONObject imagedata = (JSONObject) JSONData.get("image");
                     JSONObject priceData = (JSONObject) JSONData.get("market_data");
-                    JSONObject JSONPrices = priceData.getJSONObject("current_price");
-                    gbpPrice = JSONPrices.getString("gbp");
-                    gbpPriceDbl = Double.parseDouble(gbpPrice);
+                    JSONObject JSONPrices = (JSONObject) priceData.get("current_price");
+                    gbpPrice = JSONPrices.getDouble("gbp");
+                   // gbpPriceDbl = Double.parseDouble(gbpPrice);
                     img = imagedata.getString("large");
                     URL ImgURL = new URL(imagedata.getString("large"));
                     largeImg = Drawable.createFromStream(ImgURL.openStream(), img);
@@ -180,6 +195,9 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     // currencyDescriptionScrollable.addView(currencyDescription);
                     coinImage.setImageDrawable(largeImg);
                     currencyHeader.setText(StringUtils.capitalize(receivedCoinNameInfo));
+                    now.setText("Now: £" + String.valueOf(gbpPrice));
+                    Message message = mHandler.obtainMessage();
+                    mHandler.handleMessage(message);
                 });
             }
 
