@@ -24,7 +24,6 @@ public class CoinListAdapter extends RecyclerView.Adapter<CoinListAdapter.CoinVi
     public static final int ADD_COIN_REQUEST = 1;
     private final LayoutInflater mInflater;
     private List<Coin> mCoins; // Cached copy of Coins
-    public CoinViewModel mCoinViewModel;
     Context context;
     CoinListAdapter adapter = this;
     private Activity activity;
