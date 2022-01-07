@@ -19,7 +19,6 @@ import java.util.List;
 public class PortfolioListAdapter extends RecyclerView.Adapter<PortfolioListAdapter.CoinViewHolder> {
 
     private final LayoutInflater mInflater;
-    private CoinViewModel cvm;
     private List<Coin> mCoins = new ArrayList<>(); //new list for Favourites
     PortfolioListAdapter adapter = this;
     Context context;
