@@ -27,11 +27,19 @@ public class Coin {
     @ColumnInfo(name = "currency_held")
     Double mCurrencyHeld;
 
-    public Coin(String coin_name,String currency, Double value, Double c_held){
+    @ColumnInfo(name = "price_increase")
+    Double mPriceIncrease;
+
+    @ColumnInfo(name = "price_decrease")
+    Double mPriceDecrease;
+
+    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;
         this.mCurrencyHeld = c_held;
+        this.mPriceIncrease = price_increase;
+        this.mPriceDecrease = price_decrease;
     }
 
     public Coin(){

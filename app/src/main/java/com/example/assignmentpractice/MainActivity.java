@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             String receivedCoinCurrency = intent.getStringExtra("coinCurrency");
             String receivedCoinValue = intent.getStringExtra("coinValue");
             Double coinValueDouble = Double.parseDouble(receivedCoinValue);
-            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, coinValueDouble, 0.0);
+            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, coinValueDouble, 0.0, 0.0, 0.0);
             cvm.insert(coin);
             Toast toast = Toast.makeText(MainActivity.this, receivedCoinName + " added to Portfolio", Toast.LENGTH_SHORT);
             toast.show();
