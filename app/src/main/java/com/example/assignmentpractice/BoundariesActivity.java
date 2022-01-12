@@ -39,16 +39,16 @@ public class BoundariesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SetPriceIncrease si = new SetPriceIncrease();
                 si.DisplaySetIncreaseDialog(BoundariesActivity.this, thresholdsCoin, (coin_name, amount) ->  {
-          //      if (handledCurrentPrice < amount){
-          //          Toast toast = Toast.makeText(BoundariesActivity.this, "Cannot be less than what the currency is currently trading at", Toast.LENGTH_SHORT);
-          //          toast.show();
-          //          finish();
-          //      }
-         //       else
-          //      {
+                if (amount < handledCurrentPrice){
+                    Toast toast = Toast.makeText(BoundariesActivity.this, "Cannot be less than what the currency is currently trading at", Toast.LENGTH_SHORT);
+                    toast.show();
+                    finish();
+                }
+                else
+                {
                     cvm.UpdatePriceIncrease(coin_name, amount);
                     finish();
-         //       }
+                }
                 });
             }
         });
