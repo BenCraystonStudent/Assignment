@@ -25,6 +25,11 @@ public class CoinRepository {
         return mCoinDao.valueAtTimeOfPurchase(coin_name);
     }
 
+    public LiveData<Double>currentValue(String coin_name)
+    {
+        return mCoinDao.currentValue(coin_name);
+    }
+
 
     public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
