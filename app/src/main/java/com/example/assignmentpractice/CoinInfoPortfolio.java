@@ -58,7 +58,7 @@ import java.util.Objects;
 import java.util.Calendar;
 
 public class CoinInfoPortfolio extends AppCompatActivity {
-    private Button buyButton;
+    private Button buyButton, setButton;
     private TextView currencyHeader, currencyDescription, profit, now, difference;
     private ScrollView currencyDescriptionScrollable;
     private String desc;
@@ -94,6 +94,18 @@ public class CoinInfoPortfolio extends AppCompatActivity {
         currencyDescription = findViewById(R.id.currencyDescription);
         currencyHeader = findViewById(R.id.currencyHeader);
         currencyDescriptionScrollable = findViewById(R.id.currencyDescriptionScrollable);
+
+        setButton = findViewById(R.id.setBtn);
+        setButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent setThresholdsIntent = new Intent(CoinInfoPortfolio.this, BoundariesActivity.class);
+                setThresholdsIntent.putExtra("thresholdsCoin", receivedCoinNameInfo);
+                startActivity(setThresholdsIntent);
+            }
+        });
+
+
         buyButton = findViewById(R.id.buyBtn);
 
             buyButton.setOnClickListener(new View.OnClickListener() {
