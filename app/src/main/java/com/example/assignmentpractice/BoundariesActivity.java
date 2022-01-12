@@ -19,6 +19,8 @@ public class BoundariesActivity extends AppCompatActivity {
     private CoinViewModel cvm;
     private String thresholdsCoin;
     private Double handledCurrentPrice;
+    private Handler observerHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class BoundariesActivity extends AppCompatActivity {
             @Override
             public void onChanged(Double aDouble) {
                 currentValueTextView.setText("Currently trading at £" + aDouble);
-                Handler observerHandler = new Handler(Looper.getMainLooper())
+                observerHandler = new Handler(Looper.getMainLooper())
                 {
                     @Override
                     public void handleMessage(Message passedPrice){
@@ -64,5 +66,7 @@ public class BoundariesActivity extends AppCompatActivity {
 
             }
         });
+        Message message = observerHandler.obtainMessage();
+        observerHandler.handleMessage(message);
     }
 }
