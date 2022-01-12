@@ -25,14 +25,6 @@ public class SetPriceIncrease {
     }
     public AlertDialog DisplaySetIncreaseDialog(Context context, String coin_name, final SetIncreaseInterface setIncreaseInterface)
     {
-        cvm = new ViewModelProvider(ViewModelStore::new).get(CoinViewModel.class);
-
-        cvm.currentValue(coin_name).observe((LifecycleOwner) this, new Observer<Double>() {
-            @Override
-            public void onChanged(Double aDouble) {
-
-            }
-        });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
