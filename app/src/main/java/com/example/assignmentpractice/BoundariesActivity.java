@@ -39,15 +39,16 @@ public class BoundariesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SetPriceIncrease si = new SetPriceIncrease();
                 si.DisplaySetIncreaseDialog(BoundariesActivity.this, thresholdsCoin, (coin_name, amount) ->  {
-                if (handledCurrentPrice > amount){
-                    Toast toast = Toast.makeText(BoundariesActivity.this, "Cannot be more than what the currency is currently trading at", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-                else
-                {
+          //      if (handledCurrentPrice < amount){
+          //          Toast toast = Toast.makeText(BoundariesActivity.this, "Cannot be less than what the currency is currently trading at", Toast.LENGTH_SHORT);
+          //          toast.show();
+          //          finish();
+          //      }
+         //       else
+          //      {
                     cvm.UpdatePriceIncrease(coin_name, amount);
                     finish();
-                }
+         //       }
                 });
             }
         });
@@ -56,17 +57,8 @@ public class BoundariesActivity extends AppCompatActivity {
             @Override
             public void onChanged(Double aDouble) {
                 currentValueTextView.setText("Currently trading at £" + aDouble);
-                observerHandler = new Handler(Looper.getMainLooper())
-                {
-                    @Override
-                    public void handleMessage(Message passedPrice){
-                        handledCurrentPrice = aDouble;
-                    }
-                };
-
+                handledCurrentPrice = aDouble;
             }
         });
-        Message message = observerHandler.obtainMessage();
-        observerHandler.handleMessage(message);
     }
 }
