@@ -15,6 +15,5 @@ public class BoundariesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boundaries);
 
-
     }
 }
