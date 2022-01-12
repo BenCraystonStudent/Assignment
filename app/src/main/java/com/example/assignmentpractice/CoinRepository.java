@@ -50,16 +50,16 @@ public class CoinRepository {
 
     private static class updatePriceIncreaseAsyncTask extends AsyncTask<Coin, Void, Void>
     {
-        public CoinDAO upiAsyncTaskDao;
+        public CoinDAO updatePriceIncreaseDAO;
 
-        public updatePriceIncreaseAsyncTask(CoinDAO dao){upiAsyncTaskDao = dao;}
+        public updatePriceIncreaseAsyncTask(CoinDAO dao){updatePriceIncreaseDAO = dao;}
 
         @Override
         protected Void doInBackground(final Coin... params)
         {
             String coin_name = params[0].mCoin;
             Double increase_price = params[0].mPriceIncrease;
-            upiAsyncTaskDao.updatePrices(coin_name, increase_price);
+            updatePriceIncreaseDAO.updatePriceIncrease(coin_name, increase_price);
             return null;
         }
 
