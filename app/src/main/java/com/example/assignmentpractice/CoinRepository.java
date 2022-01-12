@@ -36,6 +36,31 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
+    public void updatePrices(String coin_name, Double current_price){
+        templateCoin = new Coin();
+        templateCoin.mCoin = coin_name;
+        templateCoin.mCurrentPrice = current_price;
+        new updatePricesAsyncTask(mCoinDao).execute(templateCoin);
+    }
+
+    private static class updatePricesAsyncTask extends AsyncTask<Coin, Void, Void>
+    {
+        public CoinDAO upAsyncTaskDao;
+
+        public updatePricesAsyncTask(CoinDAO dao){upAsyncTaskDao = dao;}
+
+        @Override
+        protected Void doInBackground(final Coin... params)
+        {
+            String coin_name = params[0].mCoin;
+            Double current_price = params[0].mCurrentPrice;
+            upAsyncTaskDao.updatePrices(coin_name, current_price);
+            return null;
+        }
+
+    }
+
+
 
     private static class insertAsyncTask extends AsyncTask<Coin, Void, Void> {
 

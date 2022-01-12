@@ -3,8 +3,10 @@ package com.example.assignmentpractice;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 public class BoundariesActivity extends AppCompatActivity {
+    private Button increaseButton, decreaseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

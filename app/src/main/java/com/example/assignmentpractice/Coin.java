@@ -33,13 +33,17 @@ public class Coin {
     @ColumnInfo(name = "price_decrease")
     Double mPriceDecrease;
 
-    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease){
+    @ColumnInfo(name = "current_price")
+    Double mCurrentPrice;
+
+    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease, Double current_price){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;
         this.mCurrencyHeld = c_held;
         this.mPriceIncrease = price_increase;
         this.mPriceDecrease = price_decrease;
+        this.mCurrentPrice = current_price;
     }
 
     public Coin(){
