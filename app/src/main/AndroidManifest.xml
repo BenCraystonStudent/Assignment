@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssignmentPractice">
         <activity
+            android:name=".BoundariesActivity"
+            android:exported="true" />
+        <activity
             android:name=".RemoveCoinActivity"
             android:exported="true" />
         <activity
