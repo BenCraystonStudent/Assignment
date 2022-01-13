@@ -16,19 +16,19 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStore;
 
-public class SetPriceIncrease {
+public class SetPriceDecrease {
     private CoinViewModel cvm;
 
-    public interface SetIncreaseInterface {
+    public interface SetDecreaseInterface {
         public void PassValues (String coin_name, Double amount);
     }
-    public AlertDialog DisplaySetIncreaseDialog(Context context, String coin_name, final SetIncreaseInterface setIncreaseInterface)
+    public AlertDialog DisplaySetDecreaseDialog(Context context, String coin_name, final SetDecreaseInterface setDecreaseInterface)
     {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
         builder.setTitle(coin_name);
-        builder.setMessage("Please Enter Increase Cap");
+        builder.setMessage("Please Enter Decrease Cap");
         View xml = inflater.inflate(R.layout.buycurrency_dialog, null);
         builder.setView(xml);
         builder.setPositiveButton("Set", new DialogInterface.OnClickListener() {
@@ -38,7 +38,7 @@ public class SetPriceIncrease {
                 coin.setText(coin_name);
                 EditText amount = (EditText)xml.findViewById(R.id.amountEntered);
 
-                setIncreaseInterface.PassValues(coin.getText().toString(), Double.parseDouble(amount.getText().toString()));
+                setDecreaseInterface.PassValues(coin.getText().toString(), Double.parseDouble(amount.getText().toString()));
                 dialog.dismiss();
             }
 

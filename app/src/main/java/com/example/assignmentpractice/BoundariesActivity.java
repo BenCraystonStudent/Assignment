@@ -53,6 +53,14 @@ public class BoundariesActivity extends AppCompatActivity {
             }
         });
 
+        decreaseButton = findViewById(R.id.decreaseButton);
+        decreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SetPriceIncrease si = new SetPriceIncrease();
+            }
+        });
+
         cvm.currentValue(thresholdsCoin).observe(this, new Observer<Double>() {
             @Override
             public void onChanged(Double aDouble) {
