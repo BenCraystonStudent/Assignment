@@ -46,7 +46,7 @@ public class CoinViewModel extends AndroidViewModel {
 
     public LiveData<Double> decreaseValue(String coin_name) {return mRepository.decreaseValue(coin_name);}
 
-    public void updateHoldDate(Long hold_date, String coin_name) {mRepository.updateHoldDate(hold_date, coin_name);}
+    public void updateHoldDate(String hold_date, String coin_name) {mRepository.updateHoldDate(hold_date, coin_name);}
 
-    public LiveData<Long> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
+    public LiveData<String> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
 }

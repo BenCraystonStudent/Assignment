@@ -52,8 +52,8 @@ public interface CoinDAO {
     LiveData<Double> decreaseValue(String coin_name);
 
     @Query("UPDATE coin_table SET holdDate=:hold_date WHERE coin_name=:coin_name")
-    void updateHoldDate(Long hold_date, String coin_name);
+    void updateHoldDate(String hold_date, String coin_name);
 
     @Query("SELECT holdDate FROM coin_table WHERE coin_name=:coin_name")
-    LiveData<Long> holdingUntilDate(String coin_name);
+    LiveData<String> holdingUntilDate(String coin_name);
 }

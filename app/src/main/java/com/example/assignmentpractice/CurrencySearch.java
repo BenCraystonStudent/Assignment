@@ -85,7 +85,7 @@ public class CurrencySearch extends AppCompatActivity {
                         for (Iterator<String> it = oJSON.keys(); it.hasNext(); ) {
                             String coinName = it.next();
                             CoinValue = oJSON.getJSONObject(coinName).getDouble("gbp");
-                            searchedCoins.add(new Coin(coinName, "gbp", CoinValue, 0.0, 0.0, 0.0, CoinValue, 0L));
+                            searchedCoins.add(new Coin(coinName, "gbp", CoinValue, 0.0, 0.0, 0.0, CoinValue, ""));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -37,9 +37,9 @@ public class Coin {
     Double mCurrentPrice;
 
     @ColumnInfo(name = "holdDate")
-    Long mDate;
+    String mDate;
 
-    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease, Double current_price, Long date){
+    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease, Double current_price, String date){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;

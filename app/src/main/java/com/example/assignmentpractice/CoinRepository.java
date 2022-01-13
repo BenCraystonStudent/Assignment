@@ -36,7 +36,7 @@ public class CoinRepository {
         return mCoinDao.increaseValue(coin_name);
     }
 
-    public LiveData<Long>holdingUntilDate(String coin_name)
+    public LiveData<String>holdingUntilDate(String coin_name)
     {
         return mCoinDao.holdingUntilDate(coin_name);
     }
@@ -56,7 +56,7 @@ public class CoinRepository {
         new insertAsyncTask(mCoinDao).execute(coin);
     }
 
-    public void updateHoldDate(Long hold_date, String coin_name){
+    public void updateHoldDate(String hold_date, String coin_name){
         templateCoin = new Coin();
         templateCoin.mCoin = coin_name;
         templateCoin.mDate = hold_date;
@@ -73,7 +73,7 @@ public class CoinRepository {
         protected Void doInBackground(final Coin... params)
         {
             String coin_name = params[0].mCoin;
-            Long hold_date = params[0].mDate;
+            String hold_date = params[0].mDate;
             updateHoldDateDAO.updateHoldDate(hold_date, coin_name);
             return null;
         }

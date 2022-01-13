@@ -116,7 +116,12 @@ public class BoundariesActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 {
+                    String s_year = String.valueOf(year);
+                    String s_month = String.valueOf(month+1);
+                    String s_day = String.valueOf(dayOfMonth);
 
+                    //NOT IDEAL!
+                    cvm.updateHoldDate(s_year+s_month+s_day, thresholdsCoin);
                 }
             }
         });

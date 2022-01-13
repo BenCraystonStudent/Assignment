@@ -87,7 +87,7 @@ public class AllCurrencies extends Fragment {
             getHTTPData();
         } catch (IOException e) {
             e.printStackTrace();
-            mCoinList.add(new Coin("Failed to add coins!", "Currency", 0.0, 0.0, 0.0, 0.0, 0.0, 0L));
+            mCoinList.add(new Coin("Failed to add coins!", "Currency", 0.0, 0.0, 0.0, 0.0, 0.0, ""));
         }
         LinearLayoutManager llm = new LinearLayoutManager(aContext);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -192,7 +192,7 @@ public class AllCurrencies extends Fragment {
                     for (Iterator<String> it = oJSON.keys(); it.hasNext(); ) {
                         String coinName = it.next();
                         CoinValue = oJSON.getJSONObject(coinName).getDouble("gbp");
-                        mCoinList.add(new Coin(coinName, "gbp", CoinValue, 0.0, 0.0, 0.0, CoinValue, 0L));
+                        mCoinList.add(new Coin(coinName, "gbp", CoinValue, 0.0, 0.0, 0.0, CoinValue, ""));
                     }
 
                 } catch (JSONException e) {
