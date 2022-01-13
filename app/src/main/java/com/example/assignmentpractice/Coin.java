@@ -36,7 +36,10 @@ public class Coin {
     @ColumnInfo(name = "current_price")
     Double mCurrentPrice;
 
-    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease, Double current_price){
+    @ColumnInfo(name = "holdDate")
+    Long mDate;
+
+    public Coin(String coin_name,String currency, Double value, Double c_held, Double price_increase, Double price_decrease, Double current_price, Long date){
         this.mCoin = coin_name;
         this.mCurrency = currency;
         this.mValue = value;
@@ -44,6 +47,7 @@ public class Coin {
         this.mPriceIncrease = price_increase;
         this.mPriceDecrease = price_decrease;
         this.mCurrentPrice = current_price;
+        this.mDate = date;
     }
 
     public Coin(){
