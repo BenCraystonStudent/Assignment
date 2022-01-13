@@ -11,6 +11,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +20,10 @@ public class BoundariesActivity extends AppCompatActivity {
     private TextView currentValueTextView, setIncrease, setDecrease;
     private CoinViewModel cvm;
     private String thresholdsCoin;
-    private Double handledCurrentPrice;
+    private Double handledCurrentPrice, handledIncreasePrice, handledDecreasePrice;
     private Toolbar toolbar;
+    private CalendarView calendar;
+    private Long dateSelected;
 
 
     @Override
@@ -92,6 +95,7 @@ public class BoundariesActivity extends AppCompatActivity {
             @Override
             public void onChanged(Double aDouble) {
                 setIncrease.setText("Currently set at " + aDouble);
+                handledIncreasePrice = aDouble;
             }
         });
 
@@ -99,7 +103,11 @@ public class BoundariesActivity extends AppCompatActivity {
             @Override
             public void onChanged(Double aDouble) {
                 setDecrease.setText("Currently set at " + aDouble);
+                handledDecreasePrice = aDouble;
             }
         });
+
+        calendar = findViewById(R.id.calendarView);
+        dateSelected = calendar.getDate();
     }
 }
