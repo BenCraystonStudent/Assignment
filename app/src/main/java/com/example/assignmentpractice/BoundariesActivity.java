@@ -110,14 +110,13 @@ public class BoundariesActivity extends AppCompatActivity {
                 handledDecreasePrice = aDouble;
             }
         });
+
         calendar = findViewById(R.id.calendarView);
-        todayDate = calendar.getDate();
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                if (todayDate != calendar.getDate())
                 {
-                    cvm.updateHoldDate(calendar.getDate(), thresholdsCoin);
+
                 }
             }
         });
