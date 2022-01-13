@@ -42,5 +42,9 @@ public class CoinViewModel extends AndroidViewModel {
 
     public void UpdatePriceDecrease(String coin_name, Double decrease_price) { mRepository.updatePriceDecrease(coin_name, decrease_price); }
 
+    public LiveData<Double> increaseValue(String coin_name) {return mRepository.increaseValue(coin_name);}
+
+    public LiveData<Double> decreaseValue(String coin_name) {return mRepository.decreaseValue(coin_name);}
+
 
 }

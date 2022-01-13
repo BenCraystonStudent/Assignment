@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class BoundariesActivity extends AppCompatActivity {
     private Button increaseButton, decreaseButton;
-    private TextView currentValueTextView;
+    private TextView currentValueTextView, setIncrease, setDecrease;
     private CoinViewModel cvm;
     private String thresholdsCoin;
     private Double handledCurrentPrice;
@@ -32,6 +32,9 @@ public class BoundariesActivity extends AppCompatActivity {
         thresholdsCoin = extras.getString("thresholdsCoin");
 
         cvm = new ViewModelProvider(this).get(CoinViewModel.class);
+
+        setIncrease = findViewById(R.id.setPriceIncrease);
+        setDecrease = findViewById(R.id.setPriceDecrease);
 
         increaseButton = findViewById(R.id.increaseButton);
         increaseButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +82,20 @@ public class BoundariesActivity extends AppCompatActivity {
             public void onChanged(Double aDouble) {
                 currentValueTextView.setText("Currently trading at £" + aDouble);
                 handledCurrentPrice = aDouble;
+            }
+        });
+
+        cvm.increaseValue(thresholdsCoin).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                setIncrease.setText("Currently set at " + aDouble);
+            }
+        });
+
+        cvm.decreaseValue(thresholdsCoin).observe(this, new Observer<Double>() {
+            @Override
+            public void onChanged(Double aDouble) {
+                setDecrease.setText("Currently set at " + aDouble);
             }
         });
     }

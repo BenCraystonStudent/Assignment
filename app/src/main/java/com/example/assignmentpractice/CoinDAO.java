@@ -45,4 +45,11 @@ public interface CoinDAO {
     @Query("UPDATE coin_table SET price_decrease=:price_decrease WHERE coin_name=:coin_name")
     void updatePriceDecrease(String coin_name, Double price_decrease);
 
+    @Query("SELECT price_increase FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> increaseValue(String coin_name);
+
+    @Query("SELECT price_decrease FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> decreaseValue(String coin_name);
+
+
 }

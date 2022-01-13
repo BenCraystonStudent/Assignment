@@ -30,6 +30,15 @@ public class CoinRepository {
         return mCoinDao.currentValue(coin_name);
     }
 
+    public LiveData<Double>increaseValue(String coin_name)
+    {
+        return mCoinDao.increaseValue(coin_name);
+    }
+
+    public LiveData<Double>decreaseValue(String coin_name)
+    {
+        return mCoinDao.decreaseValue(coin_name);
+    }
 
     public LiveData<Double> returnTotalInvestments(){return mTotalInvested;};
 
