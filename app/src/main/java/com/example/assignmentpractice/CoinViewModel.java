@@ -48,5 +48,5 @@ public class CoinViewModel extends AndroidViewModel {
 
     public void updateHoldDate(Long hold_date, String coin_name) {mRepository.updateHoldDate(hold_date, coin_name);}
 
-
+    public LiveData<Long> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
 }
