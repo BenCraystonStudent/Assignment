@@ -1,5 +1,6 @@
 package com.example.assignmentpractice;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
@@ -15,6 +16,8 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+
 public class BoundariesActivity extends AppCompatActivity {
     private Button increaseButton, decreaseButton;
     private TextView currentValueTextView, setIncrease, setDecrease;
@@ -23,7 +26,8 @@ public class BoundariesActivity extends AppCompatActivity {
     private Double handledCurrentPrice, handledIncreasePrice, handledDecreasePrice;
     private Toolbar toolbar;
     private CalendarView calendar;
-    private Long dateSelected;
+    private Long dateSelected, todayDate;
+    private SimpleDateFormat simpleDate;
 
 
     @Override
@@ -106,8 +110,16 @@ public class BoundariesActivity extends AppCompatActivity {
                 handledDecreasePrice = aDouble;
             }
         });
-
         calendar = findViewById(R.id.calendarView);
-        dateSelected = calendar.getDate();
+        todayDate = calendar.getDate();
+        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                if (todayDate != calendar.getDate())
+                {
+                    cvm.updateHoldDate(calendar.getDate(), thresholdsCoin);
+                }
+            }
+        });
     }
 }
