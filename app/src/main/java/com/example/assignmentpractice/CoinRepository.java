@@ -21,7 +21,8 @@ public class CoinRepository {
         mTotalInvested = mCoinDao.totalInvestments();
     }
 
-    public LiveData<Double> getVATOP(String coin_name){
+    public LiveData<Double> getVATOP(String coin_name)
+    {
         return mCoinDao.valueAtTimeOfPurchase(coin_name);
     }
 
@@ -33,6 +34,11 @@ public class CoinRepository {
     public LiveData<Double>increaseValue(String coin_name)
     {
         return mCoinDao.increaseValue(coin_name);
+    }
+
+    public LiveData<Long>holdingUntilDate(String coin_name)
+    {
+        return mCoinDao.holdingUntilDate(coin_name);
     }
 
     public LiveData<Double>decreaseValue(String coin_name)
@@ -48,6 +54,29 @@ public class CoinRepository {
 
     public void insert (Coin coin) {
         new insertAsyncTask(mCoinDao).execute(coin);
+    }
+
+    public void updateHoldDate(Long hold_date, String coin_name){
+        templateCoin = new Coin();
+        templateCoin.mCoin = coin_name;
+        templateCoin.mDate = hold_date;
+        new updateHoldDateAsyncTask(mCoinDao).execute(templateCoin);
+    }
+
+    private static class updateHoldDateAsyncTask extends AsyncTask<Coin, Void, Void>
+    {
+        public CoinDAO updateHoldDateDAO;
+
+        public updateHoldDateAsyncTask(CoinDAO dao){updateHoldDateDAO = dao;}
+
+        @Override
+        protected Void doInBackground(final Coin... params)
+        {
+            String coin_name = params[0].mCoin;
+            Long hold_date = params[0].mDate;
+            updateHoldDateDAO.updateHoldDate(hold_date, coin_name);
+            return null;
+        }
     }
 
     public void updatePriceIncrease(String coin_name, Double increase_price){
