@@ -57,7 +57,20 @@ public class BoundariesActivity extends AppCompatActivity {
         decreaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SetPriceIncrease si = new SetPriceIncrease();
+                SetPriceDecrease sd = new SetPriceDecrease();
+                sd.DisplaySetDecreaseDialog(BoundariesActivity.this, thresholdsCoin, (coin_name, amount) ->
+                {
+                    if (amount > handledCurrentPrice){
+                        Toast toast = Toast.makeText(BoundariesActivity.this, "Cannot be more than what the currency is currently trading at", Toast.LENGTH_SHORT);
+                        toast.show();
+                        finish();
+                    }
+                    else
+                    {
+                        cvm.UpdatePriceDecrease(coin_name, amount);
+                        finish();
+                    }
+                });
             }
         });
 
