@@ -1,6 +1,7 @@
 package com.example.assignmentpractice;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,7 +20,7 @@ public class BoundariesActivity extends AppCompatActivity {
     private CoinViewModel cvm;
     private String thresholdsCoin;
     private Double handledCurrentPrice;
-    private Handler observerHandler;
+    private Toolbar toolbar;
 
 
     @Override
@@ -35,6 +36,8 @@ public class BoundariesActivity extends AppCompatActivity {
 
         setIncrease = findViewById(R.id.setPriceIncrease);
         setDecrease = findViewById(R.id.setPriceDecrease);
+        toolbar = findViewById(R.id.boundariesToolbar);
+        toolbar.setTitle(thresholdsCoin);
 
         increaseButton = findViewById(R.id.increaseButton);
         increaseButton.setOnClickListener(new View.OnClickListener() {
