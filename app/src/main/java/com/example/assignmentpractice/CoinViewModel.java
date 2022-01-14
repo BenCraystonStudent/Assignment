@@ -50,6 +50,6 @@ public class CoinViewModel extends AndroidViewModel {
 
     public LiveData<String> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
 
-    //TODO Add methods which will parse the hold_date string to a SimpleDateFormat, allowing Android services to monitor actions based on time
+    //TODO Add methods which will parse the hold_date string to a SimpleDateFormat, allowing Android services to monitor actions based on time OR if statement in Main which determines using LiveData if a date on a Coin has expired and then sells the currency off
 
 }

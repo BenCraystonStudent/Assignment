@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 
 public class BoundariesActivity extends AppCompatActivity {
     private Button increaseButton, decreaseButton;
-    private TextView currentValueTextView, setIncrease, setDecrease;
+    private TextView currentValueTextView, setIncrease, setDecrease, holdingUntilTV, noDateSet;
     private CoinViewModel cvm;
     private String thresholdsCoin;
     private Double handledCurrentPrice, handledIncreasePrice, handledDecreasePrice;
@@ -111,6 +111,18 @@ public class BoundariesActivity extends AppCompatActivity {
             }
         });
 
+        noDateSet = findViewById(R.id.noDateSet);
+
+        holdingUntilTV = findViewById(R.id.holdingUntilTextview);
+        cvm.holdingUntilDate(thresholdsCoin).observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                holdingUntilTV.setText("Holding until " + s);
+                holdingUntilTV.setVisibility(View.VISIBLE);
+                noDateSet.setVisibility(View.INVISIBLE);
+            }
+        });
+
         calendar = findViewById(R.id.calendarView);
         calendar.setMinDate(calendar.getDate());
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -123,6 +135,9 @@ public class BoundariesActivity extends AppCompatActivity {
 
                     //NOT IDEAL!
                     cvm.updateHoldDate(s_year + " " + s_month + " " + s_day, thresholdsCoin);
+
+                    holdingUntilTV.setVisibility(View.VISIBLE);
+                    noDateSet.setVisibility(View.INVISIBLE);
                 }
             }
         });
