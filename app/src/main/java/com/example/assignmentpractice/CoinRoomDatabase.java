@@ -14,7 +14,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import java.util.List;
 
-@Database(entities = {Coin.class}, version = 8, exportSchema = false)
+@Database(entities = {Coin.class}, version = 9, exportSchema = false)
 public abstract class CoinRoomDatabase extends RoomDatabase {
     public abstract CoinDAO coinDao();
     private static CoinRoomDatabase INSTANCE;
