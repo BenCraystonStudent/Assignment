@@ -33,4 +33,27 @@ public interface CoinDAO {
     @Query("SELECT value FROM coin_table WHERE coin_name = :coin_name")
     LiveData<Double> valueAtTimeOfPurchase(String coin_name);
 
+    @Query("UPDATE coin_table SET current_price=:c_price WHERE coin_name=:coin_name")
+    void updatePrices(String coin_name, Double c_price);
+
+    @Query("SELECT current_price FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> currentValue(String coin_name);
+
+    @Query("UPDATE coin_table SET price_increase=:price_increase WHERE coin_name=:coin_name")
+    void updatePriceIncrease(String coin_name, Double price_increase);
+
+    @Query("UPDATE coin_table SET price_decrease=:price_decrease WHERE coin_name=:coin_name")
+    void updatePriceDecrease(String coin_name, Double price_decrease);
+
+    @Query("SELECT price_increase FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> increaseValue(String coin_name);
+
+    @Query("SELECT price_decrease FROM coin_table WHERE coin_name = :coin_name")
+    LiveData<Double> decreaseValue(String coin_name);
+
+    @Query("UPDATE coin_table SET holdDate=:hold_date WHERE coin_name=:coin_name")
+    void updateHoldDate(String hold_date, String coin_name);
+
+    @Query("SELECT holdDate FROM coin_table WHERE coin_name=:coin_name")
+    LiveData<String> holdingUntilDate(String coin_name);
 }

@@ -34,4 +34,22 @@ public class CoinViewModel extends AndroidViewModel {
 
     public LiveData<Double> returnTotalInvestments() {return mTotalInvested;}
 
+    public void updatePrices(String coin_name, Double current_price){mRepository.updatePrices(coin_name, current_price);}
+
+    public LiveData<Double> currentValue(String coin_name) {return mRepository.currentValue(coin_name);}
+
+    public void UpdatePriceIncrease(String coin_name, Double increase_price) { mRepository.updatePriceIncrease(coin_name, increase_price); }
+
+    public void UpdatePriceDecrease(String coin_name, Double decrease_price) { mRepository.updatePriceDecrease(coin_name, decrease_price); }
+
+    public LiveData<Double> increaseValue(String coin_name) {return mRepository.increaseValue(coin_name);}
+
+    public LiveData<Double> decreaseValue(String coin_name) {return mRepository.decreaseValue(coin_name);}
+
+    public void updateHoldDate(String hold_date, String coin_name) {mRepository.updateHoldDate(hold_date, coin_name);}
+
+    public LiveData<String> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
+
+    //TODO Add methods which will parse the hold_date string to a SimpleDateFormat, allowing Android services to monitor actions based on time OR if statement in Main which determines using LiveData if a date on a Coin has expired and then sells the currency off
+
 }

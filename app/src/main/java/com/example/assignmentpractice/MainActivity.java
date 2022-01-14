@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     public SearchView searchView;
     public SearchManager searchManager;
     private ImageButton userProfile;
+    private Handler geckoHandler = new Handler();
 
 
     @Override
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         mViewPager.addOnPageChangeListener(this);
         mainTabs.setupWithViewPager(mViewPager);
         mainTabs.setSelectedTabIndicatorColor(Color.BLUE);
+
+        geckoHandler.post(geckoCall);
     }
 
     @Override
@@ -135,12 +139,97 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             String receivedCoinCurrency = intent.getStringExtra("coinCurrency");
             String receivedCoinValue = intent.getStringExtra("coinValue");
             Double coinValueDouble = Double.parseDouble(receivedCoinValue);
-            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, coinValueDouble, 0.0);
+            Coin coin = new Coin(receivedCoinName, receivedCoinCurrency, coinValueDouble, 0.0, 0.0, 0.0, coinValueDouble, "");
             cvm.insert(coin);
             Toast toast = Toast.makeText(MainActivity.this, receivedCoinName + " added to Portfolio", Toast.LENGTH_SHORT);
             toast.show();
         }
     };
 
+    public Runnable geckoCall = new Runnable() {
+        @Override
+        public void run() {
 
-}
+                /* https://www.coingecko.com/api/documentations/v3#/ */
+                OkHttpClient client = new OkHttpClient();
+                /* Set API URL */
+                HttpUrl.Builder urlBuilder =
+                        Objects.requireNonNull(HttpUrl.parse("https://api.coingecko.com/api/v3/simple/price"))
+                                .newBuilder();
+                /* Add coin list to be fetched could be a string resource */
+                urlBuilder.addQueryParameter("ids",
+                        "ampleforth,ankr,apollo,bancor,binancecoin,bitcoin,bitcoin-cash,cardano,chainlink,"
+                                + "dash,ethereum,tether,polkadot,uniswap,litecoin,internet-computer,eos,"
+                                + "the-graph,maker,numeraire,decentraland,sushi,filecoin");
+
+                /* Add the returned currency parameter */
+                urlBuilder.addQueryParameter("vs_currencies", "gbp");
+
+                /* Build the URL with params */
+                String url = urlBuilder.build().toString();
+
+                /* Create an OkHTTP request object */
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+
+                /* Add the request to the call queue for sending */
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        JSONObject oCoin;
+
+                        final String myResponse = Objects.requireNonNull(response.body(), "Invalid Null API Response Received").string();
+                        Log.d("OkHTTPResponse", "API Call Successful");
+                        response.close();
+                        /*
+                        Format Array of key value pairs
+                        Key = Coin Name
+                        Value = Coin data object
+
+                            Coin data object has one key value pair
+                            Key   = the currency
+                            Value = the value of the coin in that currency
+
+                        Sample JSON
+                        {
+                        "filecoin":{"gbp":40.32},
+                        "uniswap":{"gbp":14.89},
+                        "ethereum":{"gbp":3303.62},
+                        "chainlink":{"gbp":18.37},
+                        "numeraire":{"gbp":29.89}
+                        }
+                         */
+                        try {
+                            JSONObject oJSON = new JSONObject(myResponse);
+
+                            double CoinValue;
+                            /* Build the list of coins from API Data */
+                            for (Iterator<String> it = oJSON.keys(); it.hasNext(); ) {
+                                String coinName = it.next();
+                                CoinValue = oJSON.getJSONObject(coinName).getDouble("gbp");
+                                cvm.updatePrices(coinName, CoinValue);
+                            }
+
+                        } catch (JSONException e) {
+                            Log.d("OkHTTPResponse", "JSON Format Problem");
+                            e.printStackTrace();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        Log.d("OkHTTPResponse", "The API call for the coins failed: "
+                                + e.getMessage());
+                        call.cancel();
+                    }
+                });
+            geckoHandler.postDelayed(geckoCall, 5000);
+            }
+        };
+
+
+
+
+    };

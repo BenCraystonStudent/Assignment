@@ -139,6 +139,7 @@ public class CoinInfoPortfolio extends AppCompatActivity {
                     public void handleMessage(Message passedPrice){
                         gotValue = aDouble;
                         difference.setText("The difference is " + String.valueOf(gotValue - gbpPrice));
+                        cvm.updatePrices(receivedCoinNameInfo, gbpPrice);
                     }
                 };
             }
