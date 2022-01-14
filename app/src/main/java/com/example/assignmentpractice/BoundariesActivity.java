@@ -112,8 +112,9 @@ public class BoundariesActivity extends AppCompatActivity {
         });
 
         noDateSet = findViewById(R.id.noDateSet);
-
         holdingUntilTV = findViewById(R.id.holdingUntilTextview);
+        holdingUntilTV.setVisibility(View.INVISIBLE);
+
         cvm.holdingUntilDate(thresholdsCoin).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -138,6 +139,7 @@ public class BoundariesActivity extends AppCompatActivity {
 
                     holdingUntilTV.setVisibility(View.VISIBLE);
                     noDateSet.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
