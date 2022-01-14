@@ -112,6 +112,7 @@ public class BoundariesActivity extends AppCompatActivity {
         });
 
         calendar = findViewById(R.id.calendarView);
+        calendar.setMinDate(calendar.getDate());
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -121,7 +122,7 @@ public class BoundariesActivity extends AppCompatActivity {
                     String s_day = String.valueOf(dayOfMonth);
 
                     //NOT IDEAL!
-                    cvm.updateHoldDate(s_year+s_month+s_day, thresholdsCoin);
+                    cvm.updateHoldDate(s_year + " " + s_month + " " + s_day, thresholdsCoin);
                 }
             }
         });
