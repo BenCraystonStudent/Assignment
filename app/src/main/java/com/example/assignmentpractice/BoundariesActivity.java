@@ -118,9 +118,14 @@ public class BoundariesActivity extends AppCompatActivity {
         cvm.holdingUntilDate(thresholdsCoin).observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                holdingUntilTV.setText("Holding until " + s);
-                holdingUntilTV.setVisibility(View.VISIBLE);
-                noDateSet.setVisibility(View.INVISIBLE);
+                if (s.isEmpty()){
+                    noDateSet.setVisibility(View.VISIBLE);
+                }
+                else {
+                    holdingUntilTV.setText("Holding until " + s);
+                    holdingUntilTV.setVisibility(View.VISIBLE);
+                    noDateSet.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
