@@ -49,4 +49,7 @@ public class CoinViewModel extends AndroidViewModel {
     public void updateHoldDate(String hold_date, String coin_name) {mRepository.updateHoldDate(hold_date, coin_name);}
 
     public LiveData<String> holdingUntilDate(String coin_name) {return mRepository.holdingUntilDate(coin_name);}
+
+    //TODO Add methods which will parse the hold_date string to a SimpleDateFormat, allowing Android services to monitor actions based on time
+
 }
